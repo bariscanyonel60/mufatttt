@@ -29,26 +29,50 @@ const CONTENT_FILE = path.join(DATA_DIR, "content.json");
 const SUBMISSIONS_FILE = path.join(DATA_DIR, "submissions.json");
 const ACTIVITY_FILE = path.join(DATA_DIR, "activity.json");
 
+/** Vercel/serverless: project filesystem is read-only. */
+function canPersist(): boolean {
+  if (process.env.VERCEL === "1") return false;
+  if (process.env.ALLOW_FS_PERSIST === "0") return false;
+  return true;
+}
+
 function ensureDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function readJson<T>(file: string, fallback: T): T {
-  ensureDir();
-  if (!fs.existsSync(file)) {
-    fs.writeFileSync(file, JSON.stringify(fallback, null, 2), "utf8");
-    return structuredClone(fallback);
-  }
   try {
-    return JSON.parse(fs.readFileSync(file, "utf8")) as T;
+    if (fs.existsSync(file)) {
+      return JSON.parse(fs.readFileSync(file, "utf8")) as T;
+    }
   } catch {
-    return structuredClone(fallback);
+    // ignore corrupt / unreadable
   }
+  // Localdev: try to seed the file. Production/Vercel: return memory fallback only.
+  if (canPersist() && ensureDir()) {
+    try {
+      fs.writeFileSync(file, JSON.stringify(fallback, null, 2), "utf8");
+    } catch {
+      // ignore
+    }
+  }
+  return structuredClone(fallback);
 }
 
-function writeJson(file: string, data: unknown) {
-  ensureDir();
-  fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
+function writeJson(file: string, data: unknown): boolean {
+  if (!canPersist()) return false;
+  if (!ensureDir()) return false;
+  try {
+    fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf8");
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function defaultContent(): ContentStore {

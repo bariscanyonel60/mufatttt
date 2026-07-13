@@ -41,7 +41,10 @@ coverage
 
 certificates
 
-# admin local data & uploads
-/data/*.json
+# admin local runtime data (seed content.json is committed)
+/data/activity.json
+/data/submissions.json
 /public/uploads
-!.gitkeep
+!/public/uploads/.gitkeep
+!/data/.gitkeep
+!/data/content.json
