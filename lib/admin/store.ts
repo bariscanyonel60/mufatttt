@@ -105,12 +105,12 @@ export function defaultContent(): ContentStore {
     milestones: structuredClone(seedMilestones),
     team: structuredClone(seedTeam),
     seo: {
-      defaultTitle: "Murat İnşaat Mühendislik | Plan, Proje, Taahhüt ve Kontrollük",
-      titleTemplate: "%s | Murat İnşaat Mühendislik",
+      defaultTitle: "MUFAT İnşaat Mühendislik | Plan, Proje, Taahhüt ve Kontrollük",
+      titleTemplate: "%s | MUFAT İnşaat Mühendislik",
       description:
-        "Murat İnşaat Mühendislik San. ve Tic. Ltd. Şti. — 2002'den bu yana inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük. TKDK/IPARD, kamu ihale, güçlendirme ve riskli yapı tespiti.",
+        "MUFAT İnşaat Mühendislik San. ve Tic. Ltd. Şti. — 2002'den bu yana inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük. TKDK/IPARD, kamu ihale, güçlendirme ve riskli yapı tespiti.",
       keywords: [
-        "Murat İnşaat Mühendislik",
+        "MUFAT İnşaat Mühendislik",
         "Turhal inşaat",
         "Tokat inşaat mühendisliği",
         "plan proje mühendislik",

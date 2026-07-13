@@ -4,9 +4,9 @@ function pub(key: string, fallback: string) {
 }
 
 const siteDefaults = {
-  name: "Murat İnşaat Mühendislik",
+  name: "MUFAT İnşaat Mühendislik",
   shortName: "MUFAT",
-  legalName: "Murat İnşaat Mühendislik San. ve Tic. Ltd. Şti.",
+  legalName: "MUFAT İnşaat Mühendislik San. ve Tic. Ltd. Şti.",
   tagline: "İnşaat · Mühendislik · Mimarlık · Taahhüt · Kontrolörlük",
   phone: "+90 356 000 00 00",
   whatsapp: "+90 500 000 00 00",
@@ -325,7 +325,7 @@ export const values = [
 ];
 
 export const milestones = [
-  { year: "2002", title: "Kuruluş", desc: "Murat İnşaat Mühendislik San. ve Tic. Ltd. Şti. olarak inşaat, mühendislik ve mimarlık faaliyetlerine başladık." },
+  { year: "2002", title: "Kuruluş", desc: "MUFAT İnşaat Mühendislik San. ve Tic. Ltd. Şti. olarak inşaat, mühendislik ve mimarlık faaliyetlerine başladık." },
   { year: "2010", title: "Taahhüt & Kontrollük", desc: "Özel bina inşaatları ile kontrollük ve şantiye şefliği hizmetlerini güçlendirdik." },
   { year: "2015", title: "Kamu İhale İşleri", desc: "4734 ve 2886 sayılı kanunlar kapsamında okul, yurt ve kamu bina işlerinde aktif rol aldık." },
   { year: "2019", title: "TKDK / IPARD", desc: "Kırsal kalkınma programları kapsamında plan/proje ve yapım hizmetlerini portföyümüze ekledik." },

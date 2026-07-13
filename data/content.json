@@ -1,8 +1,8 @@
 {
   "site": {
-    "name": "Murat İnşaat Mühendislik",
+    "name": "MUFAT İnşaat Mühendislik",
     "shortName": "MUFAT",
-    "legalName": "Murat İnşaat Mühendislik San. ve Tic. Ltd. Şti.",
+    "legalName": "MUFAT İnşaat Mühendislik San. ve Tic. Ltd. Şti.",
     "tagline": "İnşaat · Mühendislik · Mimarlık · Taahhüt · Kontrolörlük",
     "phone": "+90 356 000 00 00",
     "whatsapp": "+90 500 000 00 00",
@@ -457,7 +457,7 @@
     {
       "year": "2002",
       "title": "Kuruluş",
-      "desc": "Murat İnşaat Mühendislik San. ve Tic. Ltd. Şti. olarak inşaat, mühendislik ve mimarlık faaliyetlerine başladık."
+      "desc": "MUFAT İnşaat Mühendislik San. ve Tic. Ltd. Şti. olarak inşaat, mühendislik ve mimarlık faaliyetlerine başladık."
     },
     {
       "year": "2010",
@@ -500,11 +500,11 @@
     }
   ],
   "seo": {
-    "defaultTitle": "Murat İnşaat Mühendislik | Plan, Proje, Taahhüt ve Kontrollük",
-    "titleTemplate": "%s | Murat İnşaat Mühendislik",
-    "description": "Murat İnşaat Mühendislik San. ve Tic. Ltd. Şti. — 2002'den bu yana inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük. TKDK/IPARD, kamu ihale, güçlendirme ve riskli yapı tespiti.",
+    "defaultTitle": "MUFAT İnşaat Mühendislik | Plan, Proje, Taahhüt ve Kontrollük",
+    "titleTemplate": "%s | MUFAT İnşaat Mühendislik",
+    "description": "MUFAT İnşaat Mühendislik San. ve Tic. Ltd. Şti. — 2002'den bu yana inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük. TKDK/IPARD, kamu ihale, güçlendirme ve riskli yapı tespiti.",
     "keywords": [
-      "Murat İnşaat Mühendislik",
+      "MUFAT İnşaat Mühendislik",
       "Turhal inşaat",
       "Tokat inşaat mühendisliği",
       "plan proje mühendislik",

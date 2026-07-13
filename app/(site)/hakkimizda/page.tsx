@@ -7,8 +7,8 @@ import CTA from "@/components/CTA";
 import { liveSite, liveValues, liveMilestones, liveTeam } from "@/lib/live";
 
 export const metadata: Metadata = {
-  title: "Hakkımızda — Murat İnşaat Mühendislik",
-  description: "2002'den bu yana Murat İnşaat Mühendislik: inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük. Ekibimiz ve kurumsal hikâyemiz.",
+  title: "Hakkımızda — MUFAT İnşaat Mühendislik",
+  description: "2002'den bu yana MUFAT İnşaat Mühendislik: inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük. Ekibimiz ve kurumsal hikâyemiz.",
 };
 
 export default function Page() {
@@ -27,7 +27,7 @@ export default function Page() {
       <section className="container-x grid gap-16 py-24 lg:grid-cols-2">
         <Reveal>
           <span className="eyebrow">Hikâyemiz</span>
-          <h2 className="h-display mt-5 text-4xl">Murat İnşaat Mühendislik</h2>
+          <h2 className="h-display mt-5 text-4xl">MUFAT İnşaat Mühendislik</h2>
           <div className="prose-mufat mt-6">
             <p>
               {site.founded}&apos;den bu yana plan/proje mühendisliğinden özel bina inşaatına, kat karşılığından

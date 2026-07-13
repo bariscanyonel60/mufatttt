@@ -8,7 +8,7 @@ import { liveServices } from "@/lib/live";
 export const metadata: Metadata = {
   title: "Hizmetler — Plan, Proje, Taahhüt ve Kontrollük",
   description:
-    "Murat İnşaat Mühendislik: plan/proje, özel bina inşaatı, kat karşılığı, TKDK/IPARD, kamu ihale (4734–2886), güçlendirme, riskli yapı tespiti, şantiye şefliği ve müşavirlik.",
+    "MUFAT İnşaat Mühendislik: plan/proje, özel bina inşaatı, kat karşılığı, TKDK/IPARD, kamu ihale (4734–2886), güçlendirme, riskli yapı tespiti, şantiye şefliği ve müşavirlik.",
 };
 
 export default function Page() {
