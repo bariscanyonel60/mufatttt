@@ -46,7 +46,7 @@ export const SERVICE_ICONS = [
   "FileBadge",
 ];
 
-export const PROJECT_TYPES = ["Konut", "Ticari", "Endüstriyel", "Güçlendirme"];
+export const PROJECT_TYPES = ["Konut", "Ticari", "Endüstriyel", "Güçlendirme", "Eğitim"];
 
 export const collections: Record<CollectionKey, CollectionMeta> = {
   services: {
@@ -84,7 +84,7 @@ export const collections: Record<CollectionKey, CollectionMeta> = {
       year: new Date().getFullYear(),
       area: "",
       services: [],
-      cover: "/images/projects/cover-konut.svg",
+      cover: "",
       gallery: [],
       summary: "",
       body: "",
@@ -97,8 +97,8 @@ export const collections: Record<CollectionKey, CollectionMeta> = {
       { key: "year", label: "Yıl", type: "number", required: true },
       { key: "area", label: "Alan", type: "text", required: true, hint: "8.400 m²" },
       { key: "services", label: "Hizmet etiketleri", type: "tags", full: true },
-      { key: "cover", label: "Kapak görseli", type: "image", full: true },
-      { key: "gallery", label: "Galeri (virgülle)", type: "tags", full: true, hint: "URL listesi" },
+      { key: "cover", label: "Kapak görseli (Cloudinary URL)", type: "image", full: true, hint: "Medya kütüphanesinden URL kopyalayın" },
+      { key: "gallery", label: "Galeri", type: "tags", full: true, hint: "Cloudinary URL listesi" },
       { key: "summary", label: "Özet", type: "textarea", required: true, full: true },
       { key: "body", label: "İçerik", type: "textarea", required: true, full: true },
     ],
@@ -114,18 +114,20 @@ export const collections: Record<CollectionKey, CollectionMeta> = {
       title: "",
       excerpt: "",
       category: "",
+      tags: [],
       date: new Date().toISOString().slice(0, 10),
       readMin: 5,
-      cover: "/images/blog/tbdy-2018.svg",
+      cover: "",
       body: [""],
     },
     fields: [
       { key: "slug", label: "Slug", type: "text", required: true },
       { key: "title", label: "Başlık", type: "text", required: true },
       { key: "category", label: "Kategori", type: "text", required: true },
+      { key: "tags", label: "Etiketler", type: "tags", full: true, hint: "virgülle ayırın" },
       { key: "date", label: "Tarih", type: "text", required: true, hint: "YYYY-MM-DD" },
       { key: "readMin", label: "Okuma (dk)", type: "number", required: true },
-      { key: "cover", label: "Kapak", type: "image", full: true },
+      { key: "cover", label: "Kapak (Cloudinary URL)", type: "image", full: true, hint: "Medya kütüphanesinden URL kopyalayın" },
       { key: "excerpt", label: "Özet", type: "textarea", required: true, full: true },
       { key: "body", label: "Paragraflar", type: "paragraphs", required: true, full: true },
     ],
@@ -227,10 +229,11 @@ export const collections: Record<CollectionKey, CollectionMeta> = {
     singular: "Üye",
     idKey: "name",
     labelKey: "name",
-    defaults: { name: "", role: "" },
+    defaults: { name: "", role: "", phone: "" },
     fields: [
       { key: "name", label: "Ad Soyad", type: "text", required: true },
       { key: "role", label: "Ünvan", type: "text", required: true },
+      { key: "phone", label: "Telefon", type: "text" },
     ],
   },
 };

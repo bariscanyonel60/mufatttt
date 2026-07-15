@@ -2,8 +2,8 @@ import { getActivity } from "@/lib/admin/store";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  const { items } = getActivity();
+export default async function Page() {
+  const { items } = await getActivity();
 
   return (
     <div className="space-y-5">

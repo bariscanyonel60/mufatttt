@@ -5,14 +5,26 @@ const COOKIE = "mufat_admin_session";
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
 function secret() {
-  return process.env.ADMIN_SECRET || "mufat-local-dev-secret-change-me";
+  const s = process.env.ADMIN_SECRET?.trim();
+  if (!s) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("ADMIN_SECRET production’da zorunludur.");
+    }
+    return "mufat-local-dev-secret-change-me";
+  }
+  return s;
 }
 
 export function adminCredentials() {
-  return {
-    user: process.env.ADMIN_USER || "admin",
-    password: process.env.ADMIN_PASSWORD || "mufat2026",
-  };
+  const user = process.env.ADMIN_USER?.trim() || "admin";
+  const password = process.env.ADMIN_PASSWORD?.trim();
+  if (!password) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("ADMIN_PASSWORD production’da zorunludur.");
+    }
+    return { user, password: "mufat2026" };
+  }
+  return { user, password };
 }
 
 function timingSafeEqualStr(a: string, b: string) {

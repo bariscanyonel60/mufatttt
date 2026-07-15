@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import PageHero from "@/components/PageHero";
-import Reveal from "@/components/Reveal";
-import Testimonials from "@/components/Testimonials";
-import CTA from "@/components/CTA";
+import PageHero from "@/components/molecules/PageHero";
+import Reveal from "@/components/atoms/Reveal";
+import Testimonials from "@/components/organisms/Testimonials";
+import CTA from "@/components/organisms/CTA";
 import { liveReferences, liveTestimonials } from "@/lib/live";
 
 export const metadata: Metadata = {
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: "MUFAT İnşaat Mühendisliği'nin çalıştığı kurumlar, işverenler ve müşteri yorumları.",
 };
 
-export default function Page() {
-  const references = liveReferences();
-  const testimonials = liveTestimonials();
+export default async function Page() {
+  const references = await liveReferences();
+  const testimonials = await liveTestimonials();
   return (
     <>
       <PageHero
@@ -25,21 +25,30 @@ export default function Page() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {references.map((r, i) => (
             <Reveal key={r.name} delay={(i % 4) * 0.06}>
-              <div className="card flex h-32 flex-col items-center justify-center gap-3 p-6 text-center font-display text-lg font-bold text-concrete transition-colors hover:text-ink">
+              <div className="card flex h-36 flex-col items-center justify-center gap-3 p-6 text-center transition hover:border-gold/40">
                 {r.logo ? (
-                  <Image
-                    src={r.logo}
-                    alt=""
-                    width={120}
-                    height={40}
-                    className="h-10 w-auto max-w-[70%] object-contain opacity-80"
-                  />
-                ) : null}
-                <span>{r.name}</span>
+                  <>
+                    <Image
+                      src={r.logo}
+                      alt={`${r.name} logosu`}
+                      width={140}
+                      height={48}
+                      className="h-12 w-auto max-w-[75%] object-contain opacity-90"
+                    />
+                    <span className="sr-only">{r.name}</span>
+                  </>
+                ) : (
+                  <span className="font-display text-lg font-bold text-concrete transition-colors hover:text-ink">
+                    {r.name}
+                  </span>
+                )}
               </div>
             </Reveal>
           ))}
         </div>
+        <p className="mt-8 text-center text-sm text-concrete">
+          Logo eklemek için admin → Referanslar → Logo URL (Cloudinary).
+        </p>
       </section>
       <section className="grid-lines bg-ink py-24">
         <div className="container-x"><Testimonials items={testimonials} /></div>

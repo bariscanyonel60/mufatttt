@@ -3,26 +3,26 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { liveServices } from "@/lib/live";
-import Reveal from "@/components/Reveal";
-import ServiceIcon from "@/components/ServiceIcon";
-import CTA from "@/components/CTA";
+import Reveal from "@/components/atoms/Reveal";
+import ServiceIcon from "@/components/atoms/ServiceIcon";
+import CTA from "@/components/organisms/CTA";
 
-export function generateStaticParams() {
-  return liveServices().map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  return (await liveServices()).map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const s = liveServices().find((x) => x.slug === slug);
+  const s = (await liveServices()).find((x) => x.slug === slug);
   if (!s) return {};
   return { title: s.title, description: s.short };
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const s = liveServices().find((x) => x.slug === slug);
+  const s = (await liveServices()).find((x) => x.slug === slug);
   if (!s) notFound();
-  const others = liveServices().filter((x) => x.slug !== s.slug).slice(0, 3);
+  const others = (await liveServices()).filter((x) => x.slug !== s.slug).slice(0, 3);
 
   return (
     <>
@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <Link href="/hizmetler" className="inline-flex items-center gap-2 text-sm text-white/50 transition hover:text-gold">
               <ArrowLeft size={15} /> Tüm Hizmetler
             </Link>
-            <div className="mt-10 flex h-14 w-14 items-center justify-center rounded-xl bg-gold text-ink">
+            <div className="mt-10 flex h-14 w-14 items-center justify-center rounded-xl bg-gold text-white">
               <ServiceIcon name={s.icon} size={24} />
             </div>
             <h1 className="h-display mt-6 max-w-3xl text-4xl text-white md:text-5xl">{s.title}</h1>

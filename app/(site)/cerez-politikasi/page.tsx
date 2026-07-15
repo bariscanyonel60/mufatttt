@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
+import PageHero from "@/components/molecules/PageHero";
 
 export const metadata: Metadata = {
   title: "Çerez Politikası",

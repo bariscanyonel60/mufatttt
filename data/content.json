@@ -4,16 +4,16 @@
     "shortName": "MUFAT",
     "legalName": "MUFAT İnşaat Mühendislik San. ve Tic. Ltd. Şti.",
     "tagline": "İnşaat · Mühendislik · Mimarlık · Taahhüt · Kontrolörlük",
-    "phone": "+90 356 000 00 00",
-    "whatsapp": "+90 500 000 00 00",
+    "phone": "+90 356 276 23 93",
+    "whatsapp": "+90 542 265 90 00",
     "email": "info@mufatmuhendislik.com",
     "address": "Cumhuriyet Cad. No:1, Turhal / Tokat",
     "hours": "Pzt – Cmt · 08:30 – 18:00",
-    "url": "https://www.mufatmuhendislik.com",
+    "url": "https://www.mufatinsaat.com",
     "founded": 2002,
     "mapEmbedUrl": "https://www.google.com/maps?q=Cumhuriyet+Cad.+No:1,+Turhal,+Tokat&output=embed",
     "socials": {
-      "instagram": "https://www.instagram.com/mufatmuhendislik",
+      "instagram": "https://www.instagram.com/mufat_insaat_muhendislik",
       "linkedin": "https://www.linkedin.com/company/mufatmuhendislik",
       "facebook": "https://www.facebook.com/mufatmuhendislik"
     },
@@ -128,117 +128,182 @@
   ],
   "projects": [
     {
-      "slug": "kervan-konaklari",
-      "title": "Kervan Konakları",
+      "slug": "uslu-tekstil-fabrika",
+      "title": "Uslu Tekstil Fabrika Binası",
       "location": "Turhal, Tokat",
-      "type": "Konut",
-      "year": 2025,
-      "area": "8.400 m²",
+      "type": "Endüstriyel",
+      "year": 2011,
+      "area": "4.200 m²",
       "services": [
-        "Statik Proje",
-        "Yapı Denetim"
+        "Özel Bina İnşaatı",
+        "Çelik / Fabrika Yapımı"
       ],
-      "cover": "/images/projects/kervan-konaklari.svg",
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/uslu-tekstil-fabrika",
       "gallery": [
-        "/images/projects/kervan-konaklari.svg",
-        "/images/projects/cover-konut.svg"
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/uslu-tekstil-fabrika"
       ],
-      "summary": "42 daireli, TBDY 2018'e göre tasarlanmış modern konut sitesi.",
-      "body": "Turhal merkezde konumlanan Kervan Konakları, iki blok ve 42 daireden oluşuyor. Zemin etüdü verilerine göre radye temel tercih edildi; perde oranı optimize edilerek hem deprem güvenliği hem daire içi net alan maksimize edildi. Kaba inşaat boyunca haftalık kontrollük yapıldı ve tüm beton dökümlerinde numune takibi belgelendi."
+      "summary": "4.200 m² tekstil üretim binası inşaatı.",
+      "body": "Turhal’da Uslu Tekstil için gerçekleştirilen fabrika binası inşaatında; yapı iskeleti, cephe ve saha imalatları birlikte yönetildi. Geniş açıklıklı üretim alanı, tesis süreçlerine uygun şekilde teslim edildi."
     },
     {
-      "slug": "tokat-osb-uretim-tesisi",
-      "title": "OSB Üretim Tesisi",
-      "location": "Tokat OSB",
+      "slug": "tibbi-atik-tesisi",
+      "title": "Tokat Tıbbi Atık Tesisi",
+      "location": "Turhal, Tokat",
       "type": "Endüstriyel",
-      "year": 2024,
-      "area": "12.600 m²",
+      "year": 2011,
+      "area": "600 m²",
       "services": [
-        "Çelik Konstrüksiyon",
+        "Özel Bina İnşaatı",
         "Kontrollük"
       ],
-      "cover": "/images/projects/tokat-osb.svg",
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/tibbi-atik-tesisi",
       "gallery": [
-        "/images/projects/tokat-osb.svg",
-        "/images/projects/cover-endustriyel.svg"
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/tibbi-atik-tesisi"
       ],
-      "summary": "24 metre açıklıklı, vinç yüklü çelik üretim tesisi.",
-      "body": "Tesis, 24 m serbest açıklık ve 10 tonluk gezer vinç yükü için tasarlandı. Çerçeve sistemde değişken kesitli kaynaklı profiller kullanılarak çelik tonajı %14 azaltıldı. İmalat resimleri atölye ile koordineli hazırlandı; montaj 11 haftada tamamlandı."
+      "summary": "600 m² tıbbi atık işleme tesisi binası inşaatı.",
+      "body": "Tokat tıbbi atık tesisi inşaatında çelik iskelet, duvar ve çatı imalatları tamamlanarak tesis işletmeye hazır hale getirildi. Sahadaki koordinasyon, teknik şartnameye uygun teslimle sonuçlandı."
     },
     {
-      "slug": "meydan-carsi",
-      "title": "Meydan Çarşı & Ofis",
-      "location": "Amasya",
-      "type": "Ticari",
-      "year": 2024,
-      "area": "5.200 m²",
-      "services": [
-        "Statik Proje",
-        "Ruhsat Danışmanlığı"
-      ],
-      "cover": "/images/projects/meydan-carsi.svg",
-      "gallery": [
-        "/images/projects/meydan-carsi.svg",
-        "/images/projects/cover-ticari.svg"
-      ],
-      "summary": "Zemin katta çarşı, üst katlarda ofis: karma kullanımlı yapı.",
-      "body": "Karma kullanım nedeniyle zemin katta geniş açıklık talep edildi. Kirişli plak yerine guseli çözüm ve stratejik perde yerleşimiyle hem mimari esneklik hem düzensizlik kontrolü sağlandı. Ruhsat süreci 6 haftada sonuçlandırıldı."
-    },
-    {
-      "slug": "cumhuriyet-okulu-guclendirme",
-      "title": "Cumhuriyet Okulu Güçlendirme",
-      "location": "Zile, Tokat",
-      "type": "Güçlendirme",
-      "year": 2023,
-      "area": "3.100 m²",
-      "services": [
-        "Performans Analizi",
-        "Güçlendirme Projesi"
-      ],
-      "cover": "/images/projects/cumhuriyet-okulu.svg",
-      "gallery": [
-        "/images/projects/cumhuriyet-okulu.svg",
-        "/images/projects/cover-guclendirme.svg"
-      ],
-      "summary": "1988 yapımı okul binasının analizi ve mantolama ile güçlendirilmesi.",
-      "body": "Karot ve donatı tespiti sonrası yapılan performans analizi, binanın 'Göçme Öncesi' seviyede olduğunu gösterdi. Betonarme mantolama ve yeni perdelerle yapı 'Kontrollü Hasar' hedefine taşındı; okul bir eğitim yılı kaybetmeden teslim edildi."
-    },
-    {
-      "slug": "yesilirmak-villalari",
-      "title": "Yeşilırmak Villaları",
+      "slug": "asude-apartmani",
+      "title": "Asude Apartmanı",
       "location": "Turhal, Tokat",
       "type": "Konut",
-      "year": 2023,
-      "area": "2.900 m²",
+      "year": 2010,
+      "area": "10 daire · 5 dükkan",
       "services": [
-        "Statik Proje",
-        "İnşaat Danışmanlığı"
+        "Özel Bina İnşaatı",
+        "Yap / Sat"
       ],
-      "cover": "/images/projects/yesilirmak-villalari.svg",
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/asude-apartmani",
       "gallery": [
-        "/images/projects/yesilirmak-villalari.svg",
-        "/images/projects/cover-konut.svg"
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/asude-apartmani"
       ],
-      "summary": "Nehir kenarında 8 adet ikiz villa; zemin iyileştirmeli temel çözümü.",
-      "body": "Yüksek yeraltı su seviyesi nedeniyle jet grout ile zemin iyileştirmesi ve su yalıtımlı radye temel uygulandı. İşveren adına müteahhit hakedişleri aylık olarak denetlendi."
+      "summary": "2008–2010 döneminde tamamlanan 10 daireli, zemin katta 5 dükkanlı konut yapısı.",
+      "body": "Asude Apartmanı; konut ve ticaret fonksiyonunu aynı yapıda birleştiren bir proje olarak inşa edildi. Cephe, balkon ve zemin kat dükkân düzeni çevre dokusuyla uyumlu şekilde tamamlandı."
     },
     {
-      "slug": "anadolu-depo-lojistik",
-      "title": "Anadolu Lojistik Deposu",
-      "location": "Sivas",
-      "type": "Endüstriyel",
-      "year": 2022,
-      "area": "9.800 m²",
+      "slug": "liva-evleri",
+      "title": "Liva Evleri",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2010,
+      "area": "22 daire",
       "services": [
+        "Özel Bina İnşaatı",
+        "Yap / Sat"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/liva-evleri",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/liva-evleri"
+      ],
+      "summary": "2006–2010 döneminde tamamlanan 22 daireli konut inşaatı.",
+      "body": "Liva Evleri, çok katlı konut bina tipolojisinde teslim edildi. İnşaat süreci boyunca kaba ve ince işler aşamalı olarak yönetildi; 22 dairenin tamamı kullanıma hazır hale getirildi."
+    },
+    {
+      "slug": "sahika-apartmani",
+      "title": "Şahika Apartmanı",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2009,
+      "area": "10 daire · 3 dükkan",
+      "services": [
+        "Özel Bina İnşaatı"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/sahika-apartmani",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/sahika-apartmani"
+      ],
+      "summary": "2006–2009 döneminde tamamlanan 10 daire ve 3 dükkanlı apartman inşaatı.",
+      "body": "Şahika Apartmanı’nda konut birimleri ile zemin kat ticaret alanları birlikte projelendirilip inşa edildi. Cephe renk düzeni ve balkon detaylarıyla yapı şehir siluetine kazandırıldı."
+    },
+    {
+      "slug": "mukavim-konut",
+      "title": "Mukavim Konut Yapı Kooperatifi",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2008,
+      "area": "45 daire",
+      "services": [
+        "Özel Bina İnşaatı",
+        "Kat Karşılığı"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/mukavim-konut",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/mukavim-konut"
+      ],
+      "summary": "2004–2008 döneminde tamamlanan 45 daireli kooperatif konut inşaatı.",
+      "body": "S.S. Mukavim Konut Yapı Kooperatifi inşaatında çok daireli konut bloğu teslim edildi. İşveren kooperatif yapısına uygun şekilde planlama, imalat ve teslim süreçleri birlikte yürütüldü."
+    },
+    {
+      "slug": "anadolu-lisesi-guclendirme",
+      "title": "Anadolu Lisesi Güçlendirme",
+      "location": "Tokat",
+      "type": "Güçlendirme",
+      "year": 2008,
+      "area": "Okul binası",
+      "services": [
+        "Bina Güçlendirme",
+        "Kontrollük"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/anadolu-lisesi-guclendirme",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/anadolu-lisesi-guclendirme"
+      ],
+      "summary": "2008 yılında tamamlanan Anadolu Lisesi binası güçlendirme inşaatı.",
+      "body": "Mevcut okul yapısının deprem güvenliğini artırmaya yönelik güçlendirme imalatları uygulandı. Eğitim fonksiyonunun korunması gözetilerek saha işleri planlandı ve yapı güçlendirilerek teslim edildi."
+    },
+    {
+      "slug": "ahmet-dincer-lisesi",
+      "title": "Ahmet Dinçer Lisesi",
+      "location": "Turhal, Tokat",
+      "type": "Eğitim",
+      "year": 2005,
+      "area": "12 derslik",
+      "services": [
+        "Kamu İhale İnşaatı",
+        "Özel Bina İnşaatı"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/ahmet-dincer-lisesi",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/ahmet-dincer-lisesi"
+      ],
+      "summary": "12 derslikli Ahmet Dinçer Lisesi okul binası inşaatı (2005).",
+      "body": "Turhal’da 12 derslikli Ahmet Dinçer Lisesi binası inşa edilerek eğitim kullanımına uygun şekilde teslim edildi. Cephe, derslik düzeni ve dış saha imalatları proje kapsamında tamamlandı."
+    },
+    {
+      "slug": "mensace-mermer-fabrika",
+      "title": "Mensace Mermer Sanayi Fabrikası",
+      "location": "Turhal, Tokat",
+      "type": "Endüstriyel",
+      "year": 2005,
+      "area": "1.500 m²",
+      "services": [
+        "OSB / Fabrika Yapımı",
         "Çelik Konstrüksiyon"
       ],
-      "cover": "/images/projects/anadolu-depo.svg",
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/mensace-mermer-fabrika",
       "gallery": [
-        "/images/projects/anadolu-depo.svg",
-        "/images/projects/cover-endustriyel.svg"
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/mensace-mermer-fabrika"
       ],
-      "summary": "Kar yükü kritik bölgede ekonomik çelik depo yapısı.",
-      "body": "Sivas'ın kar yükü değerleri için aşık ve çapraz sistemleri optimize edildi. Tasarım, işverenin ileride 4.000 m² ek depo yapabilmesine imkân verecek şekilde genişlemeye hazır kurgulandı."
+      "summary": "1.500 m² mermer sanayi fabrika binası inşaatı (2005).",
+      "body": "Mensace Mermer Sanayi için çelik iskeletli fabrika binası inşaatı gerçekleştirildi. Geniş açıklıklı üretim alanı ve saha hazırlığı aynı süreçte tamamlandı."
+    },
+    {
+      "slug": "ozel-bina-2005",
+      "title": "Özel Bina İnşaatı",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2005,
+      "area": "Çok katlı konut",
+      "services": [
+        "Özel Bina İnşaatı"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/ozel-bina-2005",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/ozel-bina-2005"
+      ],
+      "summary": "2005 yılında tamamlanan çok katlı özel konut binası inşaatı.",
+      "body": "Turhal’da özel işveren için gerçekleştirilen çok katlı konut binası; kaba inşaattan ince işlere kadar tamamlanarak teslim edildi."
     }
   ],
   "projectFilters": [
@@ -246,7 +311,8 @@
     "Konut",
     "Ticari",
     "Endüstriyel",
-    "Güçlendirme"
+    "Güçlendirme",
+    "Eğitim"
   ],
   "posts": [
     {
@@ -256,12 +322,17 @@
       "category": "Deprem Güvenliği",
       "date": "2026-05-14",
       "readMin": 6,
-      "cover": "/images/blog/tbdy-2018.svg",
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/blog/tbdy-2018",
       "body": [
         "TBDY 2018, Türkiye'de yapı güvenliğinin çerçevesini çizen temel metindir. Teknik bir doküman gibi görünse de aslında doğrudan sizin evinizin, iş yerinizin güvenliğini tanımlar.",
         "Yönetmeliğin en önemli yeniliği, deprem tehlikesinin artık il bazında değil koordinat bazında hesaplanmasıdır. Yani Turhal'ın iki farklı mahallesindeki iki bina için bile farklı deprem yükleri söz konusu olabilir.",
         "Bina yaptırıyorsanız statik projenizin hangi performans hedefine göre tasarlandığını sormaktan çekinmeyin. 'Can güvenliği' asgari hedeftir; okul ve hastane gibi yapılarda daha yüksek hedefler zorunludur.",
         "Mevcut bir bina satın alıyorsanız yapım yılı 2000 öncesiyse mutlaka bir performans analizi düşünün. Analiz maliyeti, taşıdığınız riskin yanında ihmal edilebilir düzeydedir."
+      ],
+      "tags": [
+        "TBDY",
+        "Deprem",
+        "Konut"
       ]
     },
     {
@@ -271,12 +342,17 @@
       "category": "Yapı Sistemleri",
       "date": "2026-03-02",
       "readMin": 8,
-      "cover": "/images/blog/celik-betonarme.svg",
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/blog/celik-betonarme",
       "body": [
         "Bu sorunun tek doğru cevabı yoktur; doğru cevap projenizin geometrisinde, zemininde ve takviminizde saklıdır.",
         "Çelik; geniş açıklık, hız ve hafiflik demektir. 20 metreyi aşan açıklıklarda ve hızlı devreye alınması gereken tesislerde çoğu zaman rakipsizdir. Buna karşılık yangın koruması ve periyodik bakım maliyeti hesaba katılmalıdır.",
         "Betonarme; rijitlik, yangın dayanımı ve yerel işçilik bulunabilirliği ile öne çıkar. Konut ve ofis tipolojilerinde toplam maliyette genellikle avantajlıdır.",
         "Pratik önerimiz: kararı kaba maliyet tablosuyla değil, 10 yıllık toplam sahip olma maliyetiyle verin. İyi bir mühendislik ofisi size her iki sistemin karşılaştırmalı ön boyutlandırmasını sunabilmelidir."
+      ],
+      "tags": [
+        "Çelik",
+        "Betonarme",
+        "Endüstriyel"
       ]
     },
     {
@@ -286,12 +362,17 @@
       "category": "Ruhsat & Mevzuat",
       "date": "2026-01-20",
       "readMin": 5,
-      "cover": "/images/blog/ruhsat.svg",
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/blog/ruhsat",
       "body": [
         "Ruhsat süreci iyi yönetildiğinde 4-8 hafta, kötü yönetildiğinde aylar sürebilir. Fark, evrakların doğru sırayla ve eksiksiz hazırlanmasındadır.",
         "İlk adım imar durumu belgesidir: arsanıza ne yapabileceğinizi bu belge söyler. Emsal, çekme mesafeleri ve kat sınırı burada netleşir.",
         "İkinci adım zemin etüdüdür. Statik proje bu rapor olmadan başlayamaz; etüdü ruhsat için formalite değil, temelinizin sigortası olarak görün.",
         "Mimari, statik, mekanik ve elektrik projeleri eş zamanlı yürütülüp belediyeye tek pakette sunulduğunda süreç ciddi hızlanır. Ofisimiz bu koordinasyonu tek elden yönetmektedir."
+      ],
+      "tags": [
+        "Ruhsat",
+        "Tokat",
+        "İmar"
       ]
     },
     {
@@ -301,12 +382,17 @@
       "category": "Deprem Güvenliği",
       "date": "2025-11-08",
       "readMin": 7,
-      "cover": "/images/blog/performans.svg",
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/blog/performans",
       "body": [
         "Performans analizi, mevcut bir binanın olası bir depremde nasıl davranacağını sayısal olarak ortaya koyan çalışmadır. Görsel inceleme değil, ölçüme dayalı bir mühendislik sürecidir.",
         "Süreç üç aşamadan oluşur: rölöve ve malzeme testleri (karot, donatı tespiti), bilgisayar ortamında modelleme ve analiz, son olarak performans raporu.",
         "Rapor sonucunda bina dört performans seviyesinden birine yerleşir. 'Göçme öncesi' veya 'göçme' seviyesindeki yapılar için güçlendirme ya da yeniden yapım kararı verilir.",
         "2000 yılı öncesi yapılar, projesiz tadilat görmüş binalar ve kolonlarında görünür hasar olan yapılar için analiz ertelenmemesi gereken bir adımdır."
+      ],
+      "tags": [
+        "Performans",
+        "Deprem",
+        "Güçlendirme"
       ]
     }
   ],
@@ -488,11 +574,13 @@
   "team": [
     {
       "name": "Ahmet Murat Doğan",
-      "role": "İnşaat Mühendisi"
+      "role": "İnşaat Mühendisi",
+      "phone": "+90 542 265 90 00"
     },
     {
       "name": "Mahmut Hamza Doğan",
-      "role": "İç Mimar"
+      "role": "İç Mimar",
+      "phone": "+90 541 502 41 94"
     },
     {
       "name": "Fatma Doğan",
@@ -517,5 +605,5 @@
       "kontrollük müşavirlik"
     ]
   },
-  "updatedAt": "2026-07-13T20:32:23.823Z"
+  "updatedAt": "2026-07-15T18:25:28.993Z"
 }

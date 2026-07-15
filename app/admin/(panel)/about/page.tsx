@@ -3,8 +3,8 @@ import { getContent } from "@/lib/admin/store";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  const c = getContent();
+export default async function Page() {
+  const c = await getContent();
   return (
     <AboutAdmin
       values={c.values as unknown as Record<string, unknown>[]}

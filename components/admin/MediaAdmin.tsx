@@ -56,9 +56,11 @@ export default function MediaAdmin() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-2xl font-bold">Medya Kütüphanesi</h1>
-          <p className="mt-1 text-sm text-white/45">Görselleri yükleyin, URL&apos;yi projelere/blog&apos;a yapıştırın</p>
+          <p className="mt-1 text-sm text-white/45">
+            Tüm görseller Cloudinary’de saklanır. Yükleyip URL kopyalayın; projeler/blog kapak alanına yapıştırın.
+          </p>
         </div>
-        <label className="cursor-pointer rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-ink">
+        <label className="cursor-pointer rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-white">
           {uploading ? "Yükleniyor…" : "Dosya yükle"}
           <input
             type="file"

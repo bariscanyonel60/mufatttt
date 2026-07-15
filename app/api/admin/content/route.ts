@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export async function GET() {
   const session = await requireApiSession();
   if (!session) return unauthorized();
-  return NextResponse.json(getContent());
+  return NextResponse.json(await getContent());
 }
 
 export async function PUT(req: Request) {
@@ -21,7 +21,7 @@ export async function PUT(req: Request) {
     return NextResponse.json({ error: "Geçersiz JSON." }, { status: 400 });
   }
 
-  const saved = saveContent(body, session.user);
+  const saved = await saveContent(body, session.user);
   revalidatePath("/", "layout");
   return NextResponse.json(saved);
 }

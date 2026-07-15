@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-gold py-3 text-sm font-semibold text-ink transition hover:bg-gold-soft disabled:opacity-60"
+            className="w-full rounded-lg bg-gold py-3 text-sm font-semibold text-white transition hover:bg-gold-soft disabled:opacity-60"
           >
             {loading ? "Giriş yapılıyor…" : "Giriş yap"}
           </button>

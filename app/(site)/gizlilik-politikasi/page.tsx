@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
+import PageHero from "@/components/molecules/PageHero";
 import { liveSite } from "@/lib/live";
 
 export const metadata: Metadata = {
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export default function Page() {
-  const site = liveSite();
+export default async function Page() {
+  const site = await liveSite();
   return (
     <>
       <PageHero eyebrow="Yasal" title="Gizlilik Politikası" lead="6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metnimiz." />

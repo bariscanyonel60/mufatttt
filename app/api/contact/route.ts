@@ -3,6 +3,7 @@ import { contactSchema } from "@/lib/forms";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { sendMail } from "@/lib/mail";
 import { addSubmission, newId } from "@/lib/admin/store";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 export async function POST(req: Request) {
   const ip = clientIp(req);
@@ -30,7 +31,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  addSubmission({
+  if (!(await verifyTurnstile(data.turnstileToken, ip))) {
+    return NextResponse.json({ error: "Güvenlik doğrulaması başarısız." }, { status: 400 });
+  }
+
+  await addSubmission({
     id: newId("contact"),
     type: "contact",
     name: data.name,

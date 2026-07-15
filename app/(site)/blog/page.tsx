@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Clock } from "lucide-react";
-import PageHero from "@/components/PageHero";
-import Reveal from "@/components/Reveal";
+import PageHero from "@/components/molecules/PageHero";
+import Reveal from "@/components/atoms/Reveal";
 import { livePosts } from "@/lib/live";
 
 export const metadata: Metadata = {
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   description: "MUFAT mühendislerinden deprem güvenliği, statik proje, çelik yapı ve ruhsat süreçleri üzerine anlaşılır rehberler.",
 };
 
-export default function Page() {
-  const posts = livePosts();
+export default async function Page() {
+  const posts = await livePosts();
   return (
     <>
       <PageHero

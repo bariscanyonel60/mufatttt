@@ -4,7 +4,7 @@ import { getContent } from "@/lib/admin/store";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  const items = getContent().posts as unknown as Record<string, unknown>[];
+export default async function Page() {
+  const items = (await getContent()).posts as unknown as Record<string, unknown>[];
   return <CollectionManager meta={collections.posts} initialItems={items} />;
 }

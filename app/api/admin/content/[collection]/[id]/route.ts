@@ -22,7 +22,7 @@ export async function PUT(req: Request, { params }: Params) {
   }
 
   item[meta.idKey] = decodeURIComponent(id);
-  const saved = upsertCollectionItem(collection as CollectionKey, item, meta.idKey, session.user);
+  const saved = await upsertCollectionItem(collection as CollectionKey, item, meta.idKey, session.user);
   revalidatePath("/", "layout");
   return NextResponse.json(saved);
 }
@@ -34,13 +34,13 @@ export async function DELETE(_req: Request, { params }: Params) {
   const meta = collections[collection as CollectionKey];
   if (!meta) return NextResponse.json({ error: "Bilinmeyen koleksiyon." }, { status: 404 });
 
-  const before = getContent();
+  const before = await getContent();
   const list = before[collection as CollectionKey] as Record<string, unknown>[];
   if (!list.some((x) => String(x[meta.idKey]) === decodeURIComponent(id))) {
     return NextResponse.json({ error: "Kayıt bulunamadı." }, { status: 404 });
   }
 
-  const saved = deleteCollectionItem(
+  const saved = await deleteCollectionItem(
     collection as CollectionKey,
     meta.idKey,
     decodeURIComponent(id),

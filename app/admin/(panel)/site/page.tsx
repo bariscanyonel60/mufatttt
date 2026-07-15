@@ -3,6 +3,6 @@ import { getContent } from "@/lib/admin/store";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  return <SiteSettingsForm initial={getContent().site} />;
+export default async function Page() {
+  return <SiteSettingsForm initial={(await getContent()).site} />;
 }

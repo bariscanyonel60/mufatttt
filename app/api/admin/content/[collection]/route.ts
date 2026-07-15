@@ -16,7 +16,7 @@ export async function GET(_req: Request, { params }: Params) {
   if (!VALID.has(collection) && collection !== "site" && collection !== "seo" && collection !== "projectFilters") {
     return NextResponse.json({ error: "Bilinmeyen koleksiyon." }, { status: 404 });
   }
-  const content = getContent();
+  const content = await getContent();
   return NextResponse.json({ items: content[collection as keyof ContentStore] });
 }
 
@@ -37,7 +37,7 @@ export async function PUT(req: Request, { params }: Params) {
   }
 
   const key = collection as keyof ContentStore;
-  const saved = patchContent(key, body.items as ContentStore[typeof key], session.user);
+  const saved = await patchContent(key, body.items as ContentStore[typeof key], session.user);
   revalidatePath("/", "layout");
   return NextResponse.json(saved);
 }
@@ -58,7 +58,7 @@ export async function POST(req: Request, { params }: Params) {
   }
 
   const meta = collections[collection as CollectionKey];
-  const content = getContent();
+  const content = await getContent();
   const list = [...(content[collection as CollectionKey] as Record<string, unknown>[])];
   const id = String(item[meta.idKey] ?? "");
   if (!id) return NextResponse.json({ error: `${meta.idKey} zorunlu.` }, { status: 400 });
@@ -66,7 +66,7 @@ export async function POST(req: Request, { params }: Params) {
     return NextResponse.json({ error: "Bu kimlik zaten var." }, { status: 409 });
   }
   list.push(item);
-  const saved = patchContent(collection as CollectionKey, list as never, session.user);
+  const saved = await patchContent(collection as CollectionKey, list as never, session.user);
   revalidatePath("/", "layout");
   return NextResponse.json(saved);
 }

@@ -15,19 +15,19 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#171717",
+          background: "#2B2D31",
           padding: 72,
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", color: "#D9A441", fontSize: 42, fontWeight: 800 }}>
-          MUFAT<span style={{ color: "#D9A441" }}>.</span>
+        <div style={{ display: "flex", color: "#2E6F64", fontSize: 42, fontWeight: 800 }}>
+          MUFAT<span style={{ color: "#2E6F64" }}>.</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div style={{ color: "#FAFAF8", fontSize: 56, fontWeight: 800, lineHeight: 1.1, maxWidth: 900 }}>
+          <div style={{ color: "#EAE7E2", fontSize: 56, fontWeight: 800, lineHeight: 1.1, maxWidth: 900 }}>
             Hesapla başlar. Sahada kanıtlanır.
           </div>
-          <div style={{ color: "rgba(250,250,248,0.55)", fontSize: 28 }}>
+          <div style={{ color: "rgba(234,231,226,0.55)", fontSize: 28 }}>
             Turhal · Tokat · İnşaat Mühendisliği
           </div>
         </div>

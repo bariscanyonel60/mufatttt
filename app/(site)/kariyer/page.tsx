@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
-import Reveal from "@/components/Reveal";
-import CareerForm from "@/components/CareerForm";
+import PageHero from "@/components/molecules/PageHero";
+import Reveal from "@/components/atoms/Reveal";
+import CareerForm from "@/components/organisms/CareerForm";
 import { liveJobs, liveSite } from "@/lib/live";
 import { MapPin, Briefcase } from "lucide-react";
 
@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   description: "MUFAT İnşaat Mühendisliği'nde açık pozisyonlar: statik mühendisi, saha kontrol mühendisi ve staj imkânları.",
 };
 
-export default function Page() {
-  const jobs = liveJobs();
-  const site = liveSite();
+export default async function Page() {
+  const jobs = await liveJobs();
+  const site = await liveSite();
   return (
     <>
       <PageHero

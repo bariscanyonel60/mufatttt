@@ -4,16 +4,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin, Calendar, Ruler, Wrench } from "lucide-react";
 import { liveProjects } from "@/lib/live";
-import Reveal from "@/components/Reveal";
-import CTA from "@/components/CTA";
+import Reveal from "@/components/atoms/Reveal";
+import CTA from "@/components/organisms/CTA";
 
-export function generateStaticParams() {
-  return liveProjects().map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await liveProjects()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const p = liveProjects().find((x) => x.slug === slug);
+  const p = (await liveProjects()).find((x) => x.slug === slug);
   if (!p) return {};
   return {
     title: `${p.title} — ${p.location}`,
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const p = liveProjects().find((x) => x.slug === slug);
+  const p = (await liveProjects()).find((x) => x.slug === slug);
   if (!p) notFound();
 
   const facts = [

@@ -6,8 +6,8 @@ import {
 
 export const dynamic = "force-dynamic";
 
-export default function AdminDashboard() {
-  const stats = getDashboardStats();
+export default async function AdminDashboard() {
+  const stats = await getDashboardStats();
 
   const cards = [
     { label: "Hizmetler", value: stats.services, href: "/admin/services", Icon: Briefcase },

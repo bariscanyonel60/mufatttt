@@ -5,5 +5,5 @@ import { getActivity } from "@/lib/admin/store";
 export async function GET() {
   const session = await requireApiSession();
   if (!session) return unauthorized();
-  return NextResponse.json(getActivity());
+  return NextResponse.json(await getActivity());
 }

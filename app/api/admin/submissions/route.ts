@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   const status = searchParams.get("status");
   const q = (searchParams.get("q") || "").toLowerCase();
 
-  let items = getSubmissions().items;
+  let items = (await getSubmissions()).items;
   if (type === "contact" || type === "career") items = items.filter((i) => i.type === type);
   if (status) items = items.filter((i) => i.status === status);
   if (q) {
@@ -41,7 +41,7 @@ export async function PATCH(req: Request) {
   }
 
   if (!body.id) return NextResponse.json({ error: "id gerekli." }, { status: 400 });
-  const updated = updateSubmission(
+  const updated = await updateSubmission(
     body.id,
     {
       ...(body.status ? { status: body.status } : {}),
@@ -59,6 +59,6 @@ export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
   if (!id) return NextResponse.json({ error: "id gerekli." }, { status: 400 });
-  deleteSubmission(id, session.user);
+  await deleteSubmission(id, session.user);
   return NextResponse.json({ ok: true });
 }

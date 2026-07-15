@@ -48,6 +48,7 @@ export type PostItem = {
   title: string;
   excerpt: string;
   category: string;
+  tags?: string[];
   date: string;
   readMin: number;
   cover: string;
@@ -75,7 +76,7 @@ export type ProcessStep = { no: string; title: string; desc: string };
 export type ValueItem = { title: string; desc: string };
 export type MilestoneItem = { year: string; title: string; desc: string };
 
-export type TeamMember = { name: string; role: string };
+export type TeamMember = { name: string; role: string; phone?: string };
 
 export type SeoSettings = {
   defaultTitle: string;
@@ -125,6 +126,7 @@ export type CareerSubmission = {
   jobId: string;
   jobTitle: string;
   message: string;
+  cvUrl?: string;
   status: SubmissionStatus;
   createdAt: string;
   note?: string;

@@ -4,7 +4,7 @@ import { getContent } from "@/lib/admin/store";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  const items = getContent().testimonials as unknown as Record<string, unknown>[];
+export default async function Page() {
+  const items = (await getContent()).testimonials as unknown as Record<string, unknown>[];
   return <CollectionManager meta={collections.testimonials} initialItems={items} />;
 }

@@ -4,16 +4,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock } from "lucide-react";
 import { livePosts } from "@/lib/live";
-import Reveal from "@/components/Reveal";
-import CTA from "@/components/CTA";
+import Reveal from "@/components/atoms/Reveal";
+import CTA from "@/components/organisms/CTA";
 
-export function generateStaticParams() {
-  return livePosts().map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await livePosts()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const p = livePosts().find((x) => x.slug === slug);
+  const p = (await livePosts()).find((x) => x.slug === slug);
   if (!p) return {};
   return {
     title: p.title,
@@ -25,9 +25,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const p = livePosts().find((x) => x.slug === slug);
+  const p = (await livePosts()).find((x) => x.slug === slug);
   if (!p) notFound();
-  const related = livePosts().filter((x) => x.slug !== p.slug && x.category === p.category).slice(0, 2);
+  const related = (await livePosts())
+    .filter((x) => x.slug !== p.slug)
+    .map((x) => {
+      const sameCategory = x.category === p.category ? 2 : 0;
+      const tagOverlap = (p.tags || []).filter((t) => (x.tags || []).includes(t)).length;
+      return { post: x, score: sameCategory + tagOverlap };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((x) => x.post);
 
   return (
     <>
@@ -39,6 +49,18 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             </Link>
             <span className="eyebrow mt-8 !text-gold">{p.category}</span>
             <h1 className="h-display mt-5 max-w-3xl text-4xl text-white md:text-5xl">{p.title}</h1>
+            {p.tags && p.tags.length > 0 && (
+              <ul className="mt-5 flex flex-wrap gap-2" aria-label="Etiketler">
+                {p.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-full border border-white/15 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-white/55"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
             <div className="mt-6 flex items-center gap-5 text-sm text-white/50">
               <time dateTime={p.date}>{new Date(p.date).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" })}</time>
               <span className="inline-flex items-center gap-1.5"><Clock size={13} /> {p.readMin} dk okuma</span>

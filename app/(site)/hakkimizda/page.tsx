@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
-import Reveal from "@/components/Reveal";
-import SectionHead from "@/components/SectionHead";
-import Counter from "@/components/Counter";
-import CTA from "@/components/CTA";
+import PageHero from "@/components/molecules/PageHero";
+import Reveal from "@/components/atoms/Reveal";
+import SectionHead from "@/components/molecules/SectionHead";
+import CTA from "@/components/organisms/CTA";
+import MilestoneTimeline from "@/components/organisms/MilestoneTimeline";
 import { liveSite, liveValues, liveMilestones, liveTeam } from "@/lib/live";
 
 export const metadata: Metadata = {
@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   description: "2002'den bu yana MUFAT İnşaat Mühendislik: inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük. Ekibimiz ve kurumsal hikâyemiz.",
 };
 
-export default function Page() {
-  const site = liveSite();
-  const values = liveValues();
-  const milestones = liveMilestones();
-  const team = liveTeam();
+export default async function Page() {
+  const site = await liveSite();
+  const values = await liveValues();
+  const milestones = await liveMilestones();
+  const team = await liveTeam();
   return (
     <>
       <PageHero
@@ -74,6 +74,11 @@ export default function Page() {
                 <div className="card h-full p-8">
                   <p className="font-display text-xl font-bold">{m.name}</p>
                   <p className="mt-2 text-sm font-medium text-gold-deep">{m.role}</p>
+                  {m.phone ? (
+                    <a href={`tel:${m.phone.replace(/\s/g, "")}`} className="mt-4 inline-block text-sm text-concrete transition hover:text-gold-deep">
+                      {m.phone}
+                    </a>
+                  ) : null}
                 </div>
               </Reveal>
             ))}
@@ -98,34 +103,11 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="grid-lines bg-ink py-24">
-        <div className="container-x">
-          <SectionHead dark eyebrow="Kilometre Taşları" title={`${new Date().getFullYear() - site.founded} yılın özeti.`} />
-          <div className="relative mt-16 space-y-12 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-white/15 md:before:left-1/2">
-            {milestones.map((m, i) => (
-              <Reveal key={m.year} delay={0.05}>
-                <div className={`relative flex flex-col gap-3 pl-10 md:w-1/2 md:pl-0 ${i % 2 ? "md:ml-auto md:pl-14" : "md:pr-14 md:text-right"}`}>
-                  <span className={`absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full border-2 border-gold bg-ink md:left-auto ${i % 2 ? "md:-left-[7.5px]" : "md:-right-[7.5px]"}`} />
-                  <span className="font-display text-3xl font-extrabold text-gold">{m.year}</span>
-                  <div>
-                    <h3 className="font-display text-lg font-bold text-white">{m.title}</h3>
-                    <p className="mt-1 text-sm text-white/50">{m.desc}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <dl className="mt-24 grid grid-cols-2 gap-8 border-t border-white/10 pt-16 md:grid-cols-4">
-            {site.stats.map((s) => (
-              <div key={s.label} className="text-center">
-                <dd className="font-display text-5xl font-extrabold text-white"><Counter value={s.value} suffix={s.suffix} /></dd>
-                <dt className="mt-2 text-xs text-white/50">{s.label}</dt>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
+      <MilestoneTimeline
+        milestones={milestones}
+        founded={site.founded}
+        stats={site.stats ?? []}
+      />
 
       <CTA />
     </>

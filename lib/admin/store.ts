@@ -15,6 +15,20 @@ import {
   team as seedTeam,
   site as seedSite,
 } from "@/lib/data";
+import { isDbEnabled } from "@/lib/db";
+import {
+  dbAddSubmission,
+  dbDeleteCollectionItem,
+  dbDeleteSubmission,
+  dbGetActivity,
+  dbGetSubmissions,
+  dbLoadContent,
+  dbLogActivity,
+  dbPatchContent,
+  dbSaveContent,
+  dbUpdateSubmission,
+  dbUpsertCollectionItem,
+} from "./mysql-store";
 import type {
   ActivityItem,
   ActivityStore,
@@ -29,7 +43,6 @@ const CONTENT_FILE = path.join(DATA_DIR, "content.json");
 const SUBMISSIONS_FILE = path.join(DATA_DIR, "submissions.json");
 const ACTIVITY_FILE = path.join(DATA_DIR, "activity.json");
 
-/** Vercel/serverless: project filesystem is read-only. */
 function canPersist(): boolean {
   if (process.env.VERCEL === "1") return false;
   if (process.env.ALLOW_FS_PERSIST === "0") return false;
@@ -51,9 +64,8 @@ function readJson<T>(file: string, fallback: T): T {
       return JSON.parse(fs.readFileSync(file, "utf8")) as T;
     }
   } catch {
-    // ignore corrupt / unreadable
+    // ignore
   }
-  // Localdev: try to seed the file. Production/Vercel: return memory fallback only.
   if (canPersist() && ensureDir()) {
     try {
       fs.writeFileSync(file, JSON.stringify(fallback, null, 2), "utf8");
@@ -127,14 +139,26 @@ export function defaultContent(): ContentStore {
   };
 }
 
-export function getContent(): ContentStore {
+export async function getContent(): Promise<ContentStore> {
+  if (isDbEnabled()) {
+    try {
+      return await dbLoadContent();
+    } catch (e) {
+      console.error("[store] MySQL okunamadı, JSON fallback:", e instanceof Error ? e.message : e);
+      return readJson(CONTENT_FILE, defaultContent());
+    }
+  }
   return readJson(CONTENT_FILE, defaultContent());
 }
 
-export function saveContent(content: ContentStore, user = "admin") {
+export async function saveContent(content: ContentStore, user = "admin") {
   const next = { ...content, updatedAt: new Date().toISOString() };
-  writeJson(CONTENT_FILE, next);
-  logActivity({
+  if (isDbEnabled()) {
+    await dbSaveContent(next);
+  } else {
+    writeJson(CONTENT_FILE, next);
+  }
+  await logActivity({
     action: "update",
     entity: "content",
     detail: "İçerik kaydedildi",
@@ -143,16 +167,27 @@ export function saveContent(content: ContentStore, user = "admin") {
   return next;
 }
 
-export function patchContent<K extends keyof ContentStore>(
+export async function patchContent<K extends keyof ContentStore>(
   key: K,
   value: ContentStore[K],
   user = "admin",
 ) {
-  const current = getContent();
+  if (isDbEnabled()) {
+    await dbPatchContent(key, value);
+    await logActivity({
+      action: "update",
+      entity: String(key),
+      detail: `${String(key)} güncellendi`,
+      user,
+    });
+    return getContent();
+  }
+
+  const current = readJson(CONTENT_FILE, defaultContent());
   current[key] = value;
   current.updatedAt = new Date().toISOString();
   writeJson(CONTENT_FILE, current);
-  logActivity({
+  await logActivity({
     action: "update",
     entity: String(key),
     detail: `${String(key)} güncellendi`,
@@ -161,13 +196,24 @@ export function patchContent<K extends keyof ContentStore>(
   return current;
 }
 
-export function upsertCollectionItem(
+export async function upsertCollectionItem(
   collection: CollectionKey,
   item: Record<string, unknown>,
   idKey: string,
   user = "admin",
 ) {
-  const content = getContent();
+  if (isDbEnabled()) {
+    const action = await dbUpsertCollectionItem(collection, item, idKey);
+    await logActivity({
+      action,
+      entity: collection,
+      detail: `${String(item[idKey] ?? "yeni kayıt")}`,
+      user,
+    });
+    return getContent();
+  }
+
+  const content = readJson(CONTENT_FILE, defaultContent());
   const list = [...(content[collection] as Record<string, unknown>[])];
   const id = String(item[idKey] ?? "");
   const idx = list.findIndex((x) => String(x[idKey]) === id);
@@ -176,7 +222,7 @@ export function upsertCollectionItem(
   (content as Record<string, unknown>)[collection] = list;
   content.updatedAt = new Date().toISOString();
   writeJson(CONTENT_FILE, content);
-  logActivity({
+  await logActivity({
     action: idx >= 0 ? "update" : "create",
     entity: collection,
     detail: `${id || "yeni kayıt"}`,
@@ -185,37 +231,43 @@ export function upsertCollectionItem(
   return content;
 }
 
-export function deleteCollectionItem(
+export async function deleteCollectionItem(
   collection: CollectionKey,
   idKey: string,
   id: string,
   user = "admin",
 ) {
-  const content = getContent();
+  if (isDbEnabled()) {
+    await dbDeleteCollectionItem(collection, idKey, id);
+    await logActivity({ action: "delete", entity: collection, detail: id, user });
+    return getContent();
+  }
+
+  const content = readJson(CONTENT_FILE, defaultContent());
   const list = (content[collection] as Record<string, unknown>[]).filter(
     (x) => String(x[idKey]) !== id,
   );
   (content as Record<string, unknown>)[collection] = list;
   content.updatedAt = new Date().toISOString();
   writeJson(CONTENT_FILE, content);
-  logActivity({
-    action: "delete",
-    entity: collection,
-    detail: id,
-    user,
-  });
+  await logActivity({ action: "delete", entity: collection, detail: id, user });
   return content;
 }
 
-export function getSubmissions(): SubmissionsStore {
+export async function getSubmissions(): Promise<SubmissionsStore> {
+  if (isDbEnabled()) return dbGetSubmissions();
   return readJson(SUBMISSIONS_FILE, { items: [] });
 }
 
-export function addSubmission(item: Submission) {
-  const store = getSubmissions();
-  store.items.unshift(item);
-  writeJson(SUBMISSIONS_FILE, store);
-  logActivity({
+export async function addSubmission(item: Submission) {
+  if (isDbEnabled()) {
+    await dbAddSubmission(item);
+  } else {
+    const store = readJson<SubmissionsStore>(SUBMISSIONS_FILE, { items: [] });
+    store.items.unshift(item);
+    writeJson(SUBMISSIONS_FILE, store);
+  }
+  await logActivity({
     action: "create",
     entity: "submission",
     detail: `${item.type}: ${item.name}`,
@@ -224,35 +276,51 @@ export function addSubmission(item: Submission) {
   return item;
 }
 
-export function updateSubmission(id: string, patch: Partial<Submission>, user = "admin") {
-  const store = getSubmissions();
+export async function updateSubmission(id: string, patch: Partial<Submission>, user = "admin") {
+  if (isDbEnabled()) {
+    await dbUpdateSubmission(id, patch);
+    await logActivity({ action: "update", entity: "submission", detail: id, user });
+    const store = await dbGetSubmissions();
+    return store.items.find((x) => x.id === id) || null;
+  }
+
+  const store = readJson<SubmissionsStore>(SUBMISSIONS_FILE, { items: [] });
   const idx = store.items.findIndex((x) => x.id === id);
   if (idx < 0) return null;
   store.items[idx] = { ...store.items[idx], ...patch } as Submission;
   writeJson(SUBMISSIONS_FILE, store);
-  logActivity({
-    action: "update",
-    entity: "submission",
-    detail: id,
-    user,
-  });
+  await logActivity({ action: "update", entity: "submission", detail: id, user });
   return store.items[idx];
 }
 
-export function deleteSubmission(id: string, user = "admin") {
-  const store = getSubmissions();
-  store.items = store.items.filter((x) => x.id !== id);
-  writeJson(SUBMISSIONS_FILE, store);
-  logActivity({ action: "delete", entity: "submission", detail: id, user });
+export async function deleteSubmission(id: string, user = "admin") {
+  if (isDbEnabled()) {
+    await dbDeleteSubmission(id);
+  } else {
+    const store = readJson<SubmissionsStore>(SUBMISSIONS_FILE, { items: [] });
+    store.items = store.items.filter((x) => x.id !== id);
+    writeJson(SUBMISSIONS_FILE, store);
+  }
+  await logActivity({ action: "delete", entity: "submission", detail: id, user });
   return true;
 }
 
-export function getActivity(): ActivityStore {
+export async function getActivity(): Promise<ActivityStore> {
+  if (isDbEnabled()) return dbGetActivity();
   return readJson(ACTIVITY_FILE, { items: [] });
 }
 
-export function logActivity(input: Omit<ActivityItem, "id" | "at">) {
-  const store = getActivity();
+export async function logActivity(input: Omit<ActivityItem, "id" | "at">) {
+  if (isDbEnabled()) {
+    try {
+      await dbLogActivity(input);
+    } catch {
+      // activity must not break primary writes
+    }
+    return;
+  }
+
+  const store = readJson<ActivityStore>(ACTIVITY_FILE, { items: [] });
   store.items.unshift({
     id: crypto.randomUUID(),
     at: new Date().toISOString(),
@@ -262,9 +330,10 @@ export function logActivity(input: Omit<ActivityItem, "id" | "at">) {
   writeJson(ACTIVITY_FILE, store);
 }
 
-export function getDashboardStats() {
-  const content = getContent();
-  const submissions = getSubmissions();
+export async function getDashboardStats() {
+  const content = await getContent();
+  const submissions = await getSubmissions();
+  const activity = await getActivity();
   const newCount = submissions.items.filter((s) => s.status === "new").length;
   const contactCount = submissions.items.filter((s) => s.type === "contact").length;
   const careerCount = submissions.items.filter((s) => s.type === "career").length;
@@ -281,7 +350,7 @@ export function getDashboardStats() {
     careerSubmissions: careerCount,
     updatedAt: content.updatedAt,
     recentSubmissions: submissions.items.slice(0, 8),
-    recentActivity: getActivity().items.slice(0, 12),
+    recentActivity: activity.items.slice(0, 12),
   };
 }
 

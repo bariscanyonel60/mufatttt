@@ -1,8 +1,10 @@
 import { Resend } from "resend";
 import { getContent } from "@/lib/admin/store";
 
-export function getMailConfig() {
-  const to = process.env.CONTACT_TO_EMAIL?.trim() || getContent().site.email;
+export async function getMailConfig() {
+  const to =
+    process.env.CONTACT_TO_EMAIL?.trim() ||
+    (await getContent()).site.email;
   const from =
     process.env.RESEND_FROM_EMAIL?.trim() || "MUFAT Web <onboarding@resend.dev>";
   return { to, from };
@@ -14,7 +16,7 @@ export async function sendMail(opts: {
   replyTo?: string;
 }): Promise<{ ok: true } | { ok: false; error: string }> {
   const key = process.env.RESEND_API_KEY?.trim();
-  const { to, from } = getMailConfig();
+  const { to, from } = await getMailConfig();
 
   if (!key) {
     if (process.env.NODE_ENV === "development") {

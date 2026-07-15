@@ -1,12 +1,13 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
-import FloatingActions from "@/components/FloatingActions";
-import CookieConsent from "@/components/CookieConsent";
+import Navbar from "@/components/organisms/Navbar";
+import Footer from "@/components/organisms/Footer";
+import SmoothScroll from "@/components/organisms/SmoothScroll";
+import FloatingActions from "@/components/organisms/FloatingActions";
+import CookieConsent from "@/components/organisms/CookieConsent";
+import Analytics from "@/components/organisms/Analytics";
 import { liveSite } from "@/lib/live";
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
-  const site = liveSite();
+export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+  const site = await liveSite();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -32,7 +33,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:text-ink focus:outline-none"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:text-white focus:outline-none"
       >
         İçeriğe atla
       </a>
@@ -46,6 +47,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Footer site={site} />
       <FloatingActions whatsapp={site.whatsapp} />
       <CookieConsent />
+      <Analytics />
     </>
   );
 }

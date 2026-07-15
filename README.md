@@ -1,12 +1,12 @@
 # MUFAT İnşaat Mühendisliği — Kurumsal Web Sitesi
 
-Next.js 15 (App Router) + TypeScript + TailwindCSS + Framer Motion + React Three Fiber ile geliştirilmiş premium kurumsal site.
+Next.js 15 (App Router) + TypeScript + TailwindCSS + Framer Motion + GSAP ile geliştirilmiş premium kurumsal site.
 
 ## Kurulum
 
 ```bash
 npm install
-cp .env.example .env.local   # Resend anahtarını doldurun
+cp .env.example .env.local   # Resend + Cloudinary + admin anahtarlarını doldurun
 npm run dev      # http://localhost:3000
 npm run build    # production build
 npm run lint
@@ -15,20 +15,27 @@ npm run lint
 ## Yapı
 
 - `app/` — Sayfalar (App Router), `api/contact` ve `api/career` (Resend)
-- `components/` — Navbar, Footer, Hero3D (yalnızca lg+ / reduced-motion kapalı), ContactForm, CareerForm, CookieConsent, …
-- `lib/data.ts` — İçerik + iletişim (NEXT_PUBLIC_SITE_* ile override)
-- `public/images/{projects,blog,og}/` — Proje/blog görselleri (SVG placeholder; gerçek fotoğraf koyun)
+- `components/` — Atomic Design: `atoms/`, `molecules/`, `organisms/` (+ `admin/`)
+- `docs/FRONTEND.md` — motion stack (Framer / GSAP / Lenis) and component map
+
+- `lib/data.ts` — Seed içerik
+- Görseller — Cloudinary (`/admin/media`)
+- Veri — MySQL (`DB_*` env) veya yoksa `data/content.json`
 
 ## Yayın öncesi
 
-1. `lib/data.ts` veya `.env.local` içinde telefon / WhatsApp / e-posta / adres / sosyal URL’leri güncelleyin.
-2. `RESEND_API_KEY` ve isteğe bağlı `RESEND_FROM_EMAIL` / `CONTACT_TO_EMAIL` ayarlayın.
-3. `public/images/` altındaki placeholder SVG’leri gerçek proje fotoğraflarıyla değiştirin.
-4. Google Maps embed URL’sini `mapEmbedUrl` veya `NEXT_PUBLIC_SITE_MAP_EMBED` ile doğrulayın.
-5. `site.url` / `NEXT_PUBLIC_SITE_URL` production domain ile eşleşsin.
+1. `ADMIN_PASSWORD` ve `ADMIN_SECRET` üretimde güçlü rastgele değerler olsun (`.env.example` boş bırakıldı).
+2. `lib/data.ts` veya `.env.local` içinde telefon / WhatsApp / e-posta / adres / sosyal URL’leri güncelleyin.
+3. `RESEND_API_KEY` ve isteğe bağlı `RESEND_FROM_EMAIL` / `CONTACT_TO_EMAIL` ayarlayın.
+4. `CLOUDINARY_*` ayarlayın; projelerine çoklu galeri görselleri yükleyin (`/admin/media`).
+5. Vercel / salt-okunur host’ta `DB_*` ile MySQL bağlayın; `scripts/schema.sql` çalıştırın.
+6. Google Maps embed URL’sini `mapEmbedUrl` veya `NEXT_PUBLIC_SITE_MAP_EMBED` ile doğrulayın.
+7. `site.url` / `NEXT_PUBLIC_SITE_URL` = `https://www.mufatinsaat.com` (apex → www yönlendirmesi `next.config.mjs`’te).
+8. İsteğe bağlı: `NEXT_PUBLIC_GA_MEASUREMENT_ID` veya `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`; Turnstile anahtarları.
 
 ## Notlar
 
-- 3D hero yalnızca masaüstünde (`min-width: 1024px`) ve `prefers-reduced-motion` kapalıyken yüklenir.
-- Çerez banner’ı tercihi `localStorage`’da tutar; analitik script’i yalnızca kabul sonrası hook ile eklenebilir.
-- Schema.org JSON-LD, Open Graph, Twitter card, sitemap ve hizmet detay sayfaları hazırdır.
+- Anasayfa hero videosu Cloudinary CDN’den gelir (`lib/media.ts`); masaüstünde scroll-scrub, mobilde autoplay.
+- Çerez onayı sonrası analytics (`components/organisms/Analytics.tsx`) yüklenir.
+- Formlarda KVKK onayı zorunlu; kariyer CV yükleme (PDF/Word) desteklenir.
+- Schema.org JSON-LD, Open Graph, Twitter card, sitemap ve güvenlik header’ları hazırdır.

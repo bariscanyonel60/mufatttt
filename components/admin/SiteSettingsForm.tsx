@@ -45,7 +45,7 @@ export default function SiteSettingsForm({ initial }: { initial: SiteContent }) 
           type="button"
           onClick={save}
           disabled={saving}
-          className="rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-ink disabled:opacity-60"
+          className="rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
         >
           {saving ? "Kaydediliyor…" : "Kaydet"}
         </button>

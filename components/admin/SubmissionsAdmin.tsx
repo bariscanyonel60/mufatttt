@@ -131,13 +131,26 @@ export default function SubmissionsAdmin() {
                 {selected.type === "contact" ? selected.subject : selected.jobTitle}
               </p>
               <p className="whitespace-pre-wrap rounded-lg bg-black/30 p-3 text-white/80">{selected.message}</p>
+              {selected.type === "career" && selected.cvUrl ? (
+                <p>
+                  <span className="text-white/40">CV:</span>{" "}
+                  <a
+                    className="text-gold underline"
+                    href={selected.cvUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Dosyayı aç
+                  </a>
+                </p>
+              ) : null}
               <div className="flex flex-wrap gap-2 pt-2">
                 {(["new", "read", "replied", "archived"] as SubmissionStatus[]).map((s) => (
                   <button
                     key={s}
                     type="button"
                     onClick={() => setStatusOf(selected.id, s)}
-                    className={`rounded-full px-3 py-1 text-xs ${selected.status === s ? "bg-gold text-ink" : "border border-white/15 text-white/60"}`}
+                    className={`rounded-full px-3 py-1 text-xs ${selected.status === s ? "bg-gold text-white" : "border border-white/15 text-white/60"}`}
                   >
                     {s}
                   </button>

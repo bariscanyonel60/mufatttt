@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
-import ProjectsGrid from "@/components/ProjectsGrid";
-import CTA from "@/components/CTA";
+import PageHero from "@/components/molecules/PageHero";
+import ProjectsGrid from "@/components/organisms/ProjectsGrid";
+import CTA from "@/components/organisms/CTA";
 import { liveProjects, liveProjectFilters } from "@/lib/live";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "MUFAT İnşaat Mühendisliği'nin Tokat, Amasya ve Sivas'ta tamamladığı konut, ticari, endüstriyel ve güçlendirme projeleri.",
 };
 
-export default function Page() {
+export default async function Page() {
   return (
     <>
       <PageHero
@@ -18,7 +18,7 @@ export default function Page() {
         lead="Aşağıdaki her projede statik hesaplar, denetim raporları ve teslim belgeleri arşivimizde saklıdır. Sorun; gösterelim."
       />
       <section className="container-x py-24">
-        <ProjectsGrid projects={liveProjects()} projectFilters={liveProjectFilters()} />
+        <ProjectsGrid projects={await liveProjects()} projectFilters={await liveProjectFilters()} />
       </section>
       <CTA />
     </>

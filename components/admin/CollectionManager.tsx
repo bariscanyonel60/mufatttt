@@ -103,7 +103,7 @@ export default function CollectionManager({
         <button
           type="button"
           onClick={startCreate}
-          className="rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-gold-soft"
+          className="rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gold-soft"
         >
           + Yeni {meta.singular}
         </button>
@@ -193,7 +193,7 @@ export default function CollectionManager({
                 type="button"
                 disabled={saving}
                 onClick={save}
-                className="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-ink disabled:opacity-60"
+                className="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
               >
                 {saving ? "Kaydediliyor…" : "Kaydet"}
               </button>

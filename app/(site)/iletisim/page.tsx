@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
-import Reveal from "@/components/Reveal";
-import ContactForm from "@/components/ContactForm";
-import { liveSite } from "@/lib/live";
+import PageHero from "@/components/molecules/PageHero";
+import Reveal from "@/components/atoms/Reveal";
+import ContactForm from "@/components/organisms/ContactForm";
+import { liveSite, liveTeam } from "@/lib/live";
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -10,10 +10,11 @@ export const metadata: Metadata = {
   description: "MUFAT İnşaat Mühendisliği Turhal / Tokat ofisi: telefon, WhatsApp, e-posta ve hızlı teklif formu. Çalışma saatleri ve konum.",
 };
 
-export default function Page() {
-  const site = liveSite();
+export default async function Page() {
+  const site = await liveSite();
+  const directLines = (await liveTeam()).filter((m) => m.phone);
   const cards = [
-    { icon: Phone, title: "Telefon", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` },
+    { icon: Phone, title: "İş Yeri", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` },
     { icon: MessageCircle, title: "WhatsApp", value: site.whatsapp, href: `https://wa.me/${site.whatsapp.replace(/[^0-9]/g, "")}` },
     { icon: Mail, title: "E-posta", value: site.email, href: `mailto:${site.email}` },
     { icon: Clock, title: "Çalışma Saatleri", value: site.hours },
@@ -47,7 +48,26 @@ export default function Page() {
               </div>
             </Reveal>
           ))}
-          <Reveal delay={0.3}>
+          {directLines.map((m, i) => (
+            <Reveal key={m.name} delay={(4 + i) * 0.06}>
+              <div className="card flex items-center gap-5 p-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ink text-gold">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-concrete">{m.name}</p>
+                  <a
+                    href={`tel:${m.phone!.replace(/\s/g, "")}`}
+                    className="font-display font-bold hover:text-gold-deep"
+                  >
+                    {m.phone}
+                  </a>
+                  <p className="mt-0.5 text-sm text-concrete">{m.role}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+          <Reveal delay={0.45}>
             <div className="card flex items-start gap-5 p-6">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ink text-gold"><MapPin size={20} /></div>
               <div>

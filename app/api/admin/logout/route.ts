@@ -5,7 +5,7 @@ import { logActivity } from "@/lib/admin/store";
 export async function POST() {
   const session = await getSession();
   if (session) {
-    logActivity({ action: "logout", entity: "auth", detail: "Çıkış", user: session.user });
+    await logActivity({ action: "logout", entity: "auth", detail: "Çıkış", user: session.user });
   }
   await destroySession();
   return NextResponse.json({ ok: true });

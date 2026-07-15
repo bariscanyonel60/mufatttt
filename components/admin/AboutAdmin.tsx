@@ -38,7 +38,7 @@ export default function AboutAdmin({
             type="button"
             onClick={() => setTab(key)}
             className={`rounded-lg px-4 py-2 text-sm font-medium ${
-              tab === key ? "bg-gold text-ink" : "border border-white/10 text-white/60"
+              tab === key ? "bg-gold text-white" : "border border-white/10 text-white/60"
             }`}
           >
             {label}
