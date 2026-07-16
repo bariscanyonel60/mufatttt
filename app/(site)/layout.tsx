@@ -31,18 +31,12 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:text-white focus:outline-none"
-      >
-        İçeriğe atla
-      </a>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SmoothScroll />
-      <Navbar />
+      <Navbar phone={site.phone} email={site.email} />
       <main id="main-content">{children}</main>
       <Footer site={site} />
       <FloatingActions whatsapp={site.whatsapp} />

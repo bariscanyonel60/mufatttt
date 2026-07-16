@@ -7,16 +7,21 @@ export async function getMailConfig() {
     (await getContent()).site.email;
   const from =
     process.env.RESEND_FROM_EMAIL?.trim() || "MUFAT Web <onboarding@resend.dev>";
-  return { to, from };
+  const careerTo =
+    process.env.CAREER_TO_EMAIL?.trim() || "insankaynaklari@mufatinsaat.com";
+  return { to, from, careerTo };
 }
 
 export async function sendMail(opts: {
   subject: string;
   html: string;
   replyTo?: string;
+  /** Override recipient (e.g. career → HR inbox). */
+  to?: string;
 }): Promise<{ ok: true } | { ok: false; error: string }> {
   const key = process.env.RESEND_API_KEY?.trim();
-  const { to, from } = await getMailConfig();
+  const { to: defaultTo, from } = await getMailConfig();
+  const to = opts.to?.trim() || defaultTo;
 
   if (!key) {
     if (process.env.NODE_ENV === "development") {

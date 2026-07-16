@@ -4,7 +4,7 @@ import Reveal from "@/components/atoms/Reveal";
 
 export default function PageHero({ eyebrow, title, lead }: { eyebrow: string; title: string; lead?: string }) {
   return (
-    <section className="grid-lines bg-ink pb-24 pt-44 md:pb-28 md:pt-48">
+    <section className="grid-lines bg-ink pb-24 pt-44 md:pb-28 md:pt-56">
       <div className="container-x">
         <Reveal>
           <span className="eyebrow !text-gold">{eyebrow}</span>

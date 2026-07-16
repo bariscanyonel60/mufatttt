@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import PageHero from "@/components/molecules/PageHero";
 import Reveal from "@/components/atoms/Reveal";
 import CareerForm from "@/components/organisms/CareerForm";
-import { liveJobs, liveSite } from "@/lib/live";
+import { liveJobs } from "@/lib/live";
 import { MapPin, Briefcase } from "lucide-react";
+
+const CAREER_EMAIL =
+  process.env.CAREER_TO_EMAIL?.trim() || "insankaynaklari@mufatinsaat.com";
 
 export const metadata: Metadata = {
   title: "Kariyer — Ekibimize Katılın",
@@ -12,7 +15,6 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const jobs = await liveJobs();
-  const site = await liveSite();
   return (
     <>
       <PageHero
@@ -37,7 +39,9 @@ export default async function Page() {
           <Reveal>
             <p className="text-sm text-concrete">
               Açık pozisyon göremediniz mi? Formdan genel başvuru bırakın veya{" "}
-              <a className="font-semibold text-gold-deep hover:underline" href={`mailto:${site.email}`}>{site.email}</a>
+              <a className="font-semibold text-gold-deep hover:underline" href={`mailto:${CAREER_EMAIL}`}>
+                {CAREER_EMAIL}
+              </a>
               {" "}adresine yazın.
             </p>
           </Reveal>

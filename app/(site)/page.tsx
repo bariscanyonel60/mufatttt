@@ -17,14 +17,43 @@ export default async function Home() {
   const projects = await liveProjects();
   const processSteps = await liveProcessSteps();
   const testimonials = await liveTestimonials();
-  const [featured, ...rest] = projects;
-  const more = rest.slice(0, 2);
+  const homeProjectSlugs = ["furkan-apartmani", "adalet-apartmani", "2-0-10-daireli-konut"];
+  const homeProjects = homeProjectSlugs
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
     <>
       <link rel="preload" as="image" href={HERO_VIDEO_POSTER} />
       <link rel="preload" as="video" href={HERO_VIDEO_SRC} type="video/mp4" />
       <Hero tagline={site.tagline} founded={site.founded} stats={site.stats ?? []} />
+
+      <section className="bg-white py-28 md:py-36" aria-label="Güncel projeler">
+        <div className="container-x">
+          <div className="flex flex-wrap items-end justify-between gap-8">
+            <SectionHead
+              eyebrow="Güncel Projeler"
+              title="Son dönemde imzamızı taşıyan yapılar."
+              lead="Son 5 yılda proje ve müteahhitliğini üstlendiğimiz konut binalarından endüstriyel tesislere kadar güncel işlerimiz."
+            />
+            <Reveal delay={0.15}>
+              <Link href="/projeler" className="btn btn-ghost-light">
+                Tüm Projeler <ArrowUpRight size={15} />
+              </Link>
+            </Reveal>
+          </div>
+
+          {homeProjects.length > 0 && (
+            <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {homeProjects.map((p, i) => (
+                <Reveal key={p.slug} delay={i * 0.06}>
+                  <ProjectCard p={p} fill />
+                </Reveal>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       <section id="hizmetler" className="container-x py-28 md:py-36" aria-label="Hizmetler">
         <div className="flex flex-wrap items-end justify-between gap-8">
@@ -43,41 +72,6 @@ export default async function Home() {
           {services.map((s, i) => (
             <ServiceCard key={s.slug} s={s} i={i} />
           ))}
-        </div>
-      </section>
-
-      <section className="bg-white py-28 md:py-36" aria-label="Seçili projeler">
-        <div className="container-x">
-          <div className="flex flex-wrap items-end justify-between gap-8">
-            <SectionHead
-              eyebrow="Seçili Projeler"
-              title="İmzamızı taşıyan yapılar."
-              lead="Konut sitelerinden endüstriyel tesislere; her ölçekte, belgeli ve denetimli işler."
-            />
-            <Reveal delay={0.15}>
-              <Link href="/projeler" className="btn btn-ghost-light">
-                Tüm Projeler <ArrowUpRight size={15} />
-              </Link>
-            </Reveal>
-          </div>
-
-          {featured && (
-            <div className="mt-16">
-              <Reveal>
-                <ProjectCard p={featured} featured />
-              </Reveal>
-            </div>
-          )}
-
-          {more.length > 0 && (
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
-              {more.map((p) => (
-                <Reveal key={p.slug}>
-                  <ProjectCard p={p} />
-                </Reveal>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 

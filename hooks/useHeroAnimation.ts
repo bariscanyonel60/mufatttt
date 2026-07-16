@@ -26,15 +26,18 @@ export function useHeroAnimation(enabled: boolean) {
       ScrollTrigger.create({
         trigger: root,
         start: "top top",
-        end: "+=220%",
+        end: "+=260%",
         pin: pin,
-        scrub: 0.65,
+        // Higher scrub = longer catch-up → smoother video + pin feel
+        scrub: 1.25,
         anticipatePin: 1,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
-          // 0–0.75 explode assemble, 0.75–1 exit (zoom out / fade cue)
-          const p = self.progress;
-          setProgress(Math.min(1, p / 0.75));
-          setExitProgress(Math.max(0, (p - 0.75) / 0.25));
+          // Soft ease so start/end of the scrub don't feel abrupt
+          const eased = gsap.parseEase("power1.inOut")(self.progress);
+          // 0–0.78 explode assemble, 0.78–1 exit (zoom out / fade cue)
+          setProgress(Math.min(1, eased / 0.78));
+          setExitProgress(Math.max(0, (eased - 0.78) / 0.22));
         },
       });
     }, root);

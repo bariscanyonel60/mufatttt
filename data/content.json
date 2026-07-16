@@ -6,7 +6,7 @@
     "tagline": "İnşaat · Mühendislik · Mimarlık · Taahhüt · Kontrolörlük",
     "phone": "+90 356 276 23 93",
     "whatsapp": "+90 542 265 90 00",
-    "email": "info@mufatmuhendislik.com",
+    "email": "info@mufatinsaat.com",
     "address": "Cumhuriyet Cad. No:1, Turhal / Tokat",
     "hours": "Pzt – Cmt · 08:30 – 18:00",
     "url": "https://www.mufatinsaat.com",
@@ -14,8 +14,8 @@
     "mapEmbedUrl": "https://www.google.com/maps?q=Cumhuriyet+Cad.+No:1,+Turhal,+Tokat&output=embed",
     "socials": {
       "instagram": "https://www.instagram.com/mufat_insaat_muhendislik",
-      "linkedin": "https://www.linkedin.com/company/mufatmuhendislik",
-      "facebook": "https://www.facebook.com/mufatmuhendislik"
+      "linkedin": "",
+      "facebook": ""
     },
     "stats": [
       {
@@ -127,6 +127,96 @@
     }
   ],
   "projects": [
+    {
+      "slug": "3-1-28-daireli-konut",
+      "title": "3+1 28 Daireli Konut Binası",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2025,
+      "area": "28 daire · 3+1",
+      "services": [
+        "Müteahhitlik",
+        "Plan / Proje"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/v1784190766/mufat/projects/3-1-28-daireli-konut.jpg",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/v1784190766/mufat/projects/3-1-28-daireli-konut.jpg"
+      ],
+      "summary": "Son dönemde proje ve müteahhitliğini yürüttüğümüz 28 daireli 3+1 konut binası.",
+      "body": "28 daireli 3+1 konut binası; plan/proje ve müteahhitlik firmamız bünyesinde gerçekleştirilmiştir. Beyaz, antrasit ve bej tonlarında çağdaş cephe, cam balkon korkulukları ve zemin kat ticaret alanlarıyla tamamlanmıştır."
+    },
+    {
+      "slug": "3-1-10-daireli-konut",
+      "title": "3+1 10 Daireli Konut Binası",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2024,
+      "area": "10 daire · 3+1",
+      "services": [
+        "Müteahhitlik",
+        "Plan / Proje"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/v1784190453/mufat/projects/3-1-10-daireli-konut.jpg",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/v1784190453/mufat/projects/3-1-10-daireli-konut.jpg"
+      ],
+      "summary": "Proje ve müteahhitliğini üstlendiğimiz 10 daireli 3+1 konut binası.",
+      "body": "Beş katlı, 10 daireli 3+1 konut binası. Plan/proje ve müteahhitlik firmamızca yürütülmüş; açık zemin kat, geniş balkonlar ve renkli yatay cephe panelleriyle tamamlanmıştır."
+    },
+    {
+      "slug": "2-0-10-daireli-konut",
+      "title": "2+0 10 Daireli Konut Binası",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2024,
+      "area": "10 daire · 2+0",
+      "services": [
+        "Müteahhitlik",
+        "Plan / Proje"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/2-0-10-daireli-konut",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/2-0-10-daireli-konut"
+      ],
+      "summary": "Proje ve müteahhitliğini üstlendiğimiz modern cepheli 10 daireli 2+0 konut binası.",
+      "body": "10 daireli 2+0 konut binası; plan/proje ve müteahhitlik firmamızca gerçekleştirilmiştir. Geniş balkonlar, ahşap dokulu düşey cephe vurgusu ve cam korkuluklarla çağdaş bir konut silueti hedeflenmiştir."
+    },
+    {
+      "slug": "furkan-apartmani",
+      "title": "Furkan Apartmanı",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2023,
+      "area": "10 daire · 3+1",
+      "services": [
+        "Müteahhitlik",
+        "Plan / Proje"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/furkan-apartmani",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/furkan-apartmani"
+      ],
+      "summary": "Proje ve müteahhitliğini üstlendiğimiz 10 daireli 3+1 konut binası (2023).",
+      "body": "Furkan Apartmanı; 10 daireli 3+1 konut binası olarak planlanıp müteahhitliğimizle inşa edilmiştir. Ahşap dokulu cephe panelleri, cam balkonlar ve modern dış aydınlatma ile 2023 yılında teslim edilmiştir."
+    },
+    {
+      "slug": "adalet-apartmani",
+      "title": "Adalet Apartmanı",
+      "location": "Turhal, Tokat",
+      "type": "Konut",
+      "year": 2022,
+      "area": "10 daire · 2+1 · 2 dükkan",
+      "services": [
+        "Müteahhitlik",
+        "Plan / Proje"
+      ],
+      "cover": "https://res.cloudinary.com/osgt7obm/image/upload/v1784190536/mufat/projects/adalet-apartmani.jpg",
+      "gallery": [
+        "https://res.cloudinary.com/osgt7obm/image/upload/v1784190536/mufat/projects/adalet-apartmani.jpg"
+      ],
+      "summary": "Son 5 yılda proje ve müteahhitliğini üstlendiğimiz 2+1, 10 daire ve 2 dükkanlı konut binası.",
+      "body": "Adalet Apartmanı; 10 daireli 2+1 konut ile zemin katta 2 dükkandan oluşur. Plan/proje ve müteahhitlik firmamızca yürütülmüş, 2022 yılında tamamlanmıştır."
+    },
     {
       "slug": "uslu-tekstil-fabrika",
       "title": "Uslu Tekstil Fabrika Binası",

@@ -1,8 +1,9 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Mail, Phone } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const links = [
@@ -17,13 +18,18 @@ const links = [
   { href: "/kariyer", label: "Kariyer" },
 ];
 
-export default function Navbar() {
+type Props = {
+  phone: string;
+  email: string;
+};
+
+export default function Navbar({ phone, email }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const path = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -31,23 +37,55 @@ export default function Navbar() {
 
   useEffect(() => setOpen(false), [path]);
 
-  const onHero = path === "/";
-  const dark = onHero && !scrolled && !open;
+  const onDark = !scrolled && !open;
+  const telHref = `tel:${phone.replace(/\s/g, "")}`;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out ${
-        scrolled ? "glass-nav shadow-card" : "bg-transparent"
+        onDark
+          ? "border-b border-white/10 bg-[#171717]/92 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.55)] backdrop-blur-md"
+          : "glass-nav shadow-card"
       }`}
     >
-      <div className="container-x flex h-[76px] items-center justify-between">
-        <Link href="/" className="group flex items-baseline gap-2" aria-label="MUFAT ana sayfa">
-          <span className={`font-display text-[22px] font-extrabold tracking-tight ${dark ? "text-white" : "text-ink"}`}>
-            MUFAT<span className="text-gold">.</span>
-          </span>
-          <span className={`hidden text-[10px] font-semibold uppercase tracking-[0.22em] sm:block ${dark ? "text-white/50" : "text-concrete"}`}>
-            İnşaat Mühendisliği
-          </span>
+      {/* Desktop contact strip */}
+      <div
+        className={`hidden border-b md:block ${
+          onDark ? "border-white/10 bg-black/25" : "border-line/80 bg-ink text-white"
+        }`}
+      >
+        <div className="container-x flex h-9 items-center justify-end gap-6 text-[13px] font-semibold">
+          <a
+            href={telHref}
+            className={`inline-flex items-center gap-2 transition ${
+              onDark ? "text-white/80 hover:text-white" : "text-white/85 hover:text-gold"
+            }`}
+          >
+            <Phone size={14} className="text-gold" aria-hidden />
+            {phone}
+          </a>
+          <a
+            href={`mailto:${email}`}
+            className={`inline-flex items-center gap-2 transition ${
+              onDark ? "text-white/80 hover:text-white" : "text-white/85 hover:text-gold"
+            }`}
+          >
+            <Mail size={14} className="text-gold" aria-hidden />
+            {email}
+          </a>
+        </div>
+      </div>
+
+      <div className="container-x flex h-[84px] items-center justify-between">
+        <Link href="/" className="group flex items-center" aria-label="MUFAT ana sayfa">
+          <Image
+            src="/images/logo.png"
+            alt="MUFAT İnşaat Mühendislik"
+            width={280}
+            height={100}
+            priority
+            className={`h-14 w-auto sm:h-16 ${onDark ? "brightness-0 invert" : ""}`}
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Ana menü">
@@ -57,10 +95,14 @@ export default function Navbar() {
               <Link
                 key={l.href}
                 href={l.href}
-                className={`group relative text-[13.5px] font-medium transition-colors ${
+                className={`group relative text-[15px] font-semibold transition-colors ${
                   active
-                    ? dark ? "text-[#C48A3A]" : "text-gold-deep"
-                    : dark ? "text-white/75 hover:text-white" : "text-ink/70 hover:text-ink"
+                    ? onDark
+                      ? "text-[#C48A3A]"
+                      : "text-gold-deep"
+                    : onDark
+                      ? "text-white/80 hover:text-white"
+                      : "text-ink/70 hover:text-ink"
                 }`}
               >
                 {l.label}
@@ -79,7 +121,7 @@ export default function Navbar() {
         </nav>
 
         <button
-          className={`lg:hidden ${dark ? "text-white" : "text-ink"}`}
+          className={`lg:hidden ${onDark ? "text-white" : "text-ink"}`}
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
           aria-expanded={open}
@@ -100,12 +142,24 @@ export default function Navbar() {
             aria-label="Mobil menü"
           >
             <div className="container-x flex flex-col gap-1 py-4">
+              <div className="mb-2 space-y-1 border-b border-line px-3 pb-3 text-[14px] font-semibold text-ink">
+                <a href={telHref} className="flex items-center gap-2 py-1.5 text-ink/80 hover:text-gold-deep">
+                  <Phone size={15} className="text-gold-deep" aria-hidden />
+                  {phone}
+                </a>
+                <a href={`mailto:${email}`} className="flex items-center gap-2 py-1.5 text-ink/80 hover:text-gold-deep">
+                  <Mail size={15} className="text-gold-deep" aria-hidden />
+                  {email}
+                </a>
+              </div>
               {links.map((l) => (
-                <Link key={l.href} href={l.href} className="rounded-lg px-3 py-3 font-medium text-ink hover:bg-paper">
+                <Link key={l.href} href={l.href} className="rounded-lg px-3 py-3 text-[15px] font-semibold text-ink hover:bg-paper">
                   {l.label}
                 </Link>
               ))}
-              <Link href="/iletisim" className="btn btn-gold mt-2">Teklif Al</Link>
+              <Link href="/iletisim" className="btn btn-gold mt-2">
+                Teklif Al
+              </Link>
               <p className="mt-4 border-t border-line px-3 pt-4 text-[12px] font-semibold uppercase tracking-[0.14em] text-gold-deep">
                 Media:{" "}
                 <a

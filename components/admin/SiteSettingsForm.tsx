@@ -70,9 +70,12 @@ export default function SiteSettingsForm({ initial }: { initial: SiteContent }) 
         <Field label="Kuruluş yılı" value={String(site.founded)} onChange={(v) => set("founded", Number(v) || 2002)} />
         <Field label="Site URL" value={site.url} onChange={(v) => set("url", v)} full />
         <Field label="Harita embed URL" value={site.mapEmbedUrl} onChange={(v) => set("mapEmbedUrl", v)} full />
-        <Field label="Instagram" value={site.socials.instagram} onChange={(v) => set("socials", { ...site.socials, instagram: v })} full />
-        <Field label="LinkedIn" value={site.socials.linkedin} onChange={(v) => set("socials", { ...site.socials, linkedin: v })} full />
-        <Field label="Facebook" value={site.socials.facebook} onChange={(v) => set("socials", { ...site.socials, facebook: v })} full />
+        <Field
+          label="Instagram"
+          value={site.socials.instagram}
+          onChange={(v) => set("socials", { ...site.socials, instagram: v, linkedin: "", facebook: "" })}
+          full
+        />
       </section>
 
       <section className="rounded-xl border border-white/8 bg-[#151922] p-5">

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { careerSchema } from "@/lib/forms";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
-import { sendMail } from "@/lib/mail";
+import { getMailConfig, sendMail } from "@/lib/mail";
 import { addSubmission, getContent, newId } from "@/lib/admin/store";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { uploadCloudinaryCv } from "@/lib/cloudinary";
@@ -92,7 +92,9 @@ export async function POST(req: Request) {
     createdAt: new Date().toISOString(),
   });
 
+  const { careerTo } = await getMailConfig();
   const result = await sendMail({
+    to: careerTo,
     subject: `[Kariyer] ${job.title} — ${data.name}`,
     replyTo: data.email,
     html: `
