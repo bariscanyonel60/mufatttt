@@ -134,7 +134,7 @@ export default function GalleryGrid({
                   <p className="font-display text-lg font-bold text-white">{lightbox.title}</p>
                 </div>
                 <Link href={`/projeler/${lightbox.slug}`} className="btn btn-gold">
-                  Projeyi gör
+                  {lightbox.title} projesini gör
                 </Link>
               </div>
             </motion.div>

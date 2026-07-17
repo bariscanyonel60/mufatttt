@@ -3,12 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock } from "lucide-react";
-import { livePosts, liveSite } from "@/lib/live";
+import { livePosts, liveProjects, liveSite } from "@/lib/live";
 import Reveal from "@/components/atoms/Reveal";
 import CTA from "@/components/organisms/CTA";
 
 export async function generateStaticParams() {
   return (await livePosts()).map((p) => ({ slug: p.slug }));
+}
+
+function projectLinkLabel(slug: string, titles: Record<string, string>) {
+  return titles[slug] ?? slug.replace(/-/g, " ");
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -44,28 +48,32 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-function LinkedParagraph({ text }: { text: string }) {
+function LinkedParagraph({ text, projectTitles }: { text: string; projectTitles: Record<string, string> }) {
   const parts = text.split(/(\/projeler\/[a-z0-9-]+)/g);
   return (
     <p>
-      {parts.map((part, i) =>
-        part.startsWith("/projeler/") ? (
+      {parts.map((part, i) => {
+        if (!part.startsWith("/projeler/")) {
+          return <span key={i}>{part}</span>;
+        }
+        const slug = part.slice("/projeler/".length);
+        const label = projectLinkLabel(slug, projectTitles);
+        return (
           <Link key={i} href={part} className="font-medium text-gold-deep underline-offset-4 hover:underline">
-            proje detay sayfası
+            {label}
           </Link>
-        ) : (
-          <span key={i}>{part}</span>
-        ),
-      )}
+        );
+      })}
     </p>
   );
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const [posts, site] = await Promise.all([livePosts(), liveSite()]);
+  const [posts, projects, site] = await Promise.all([livePosts(), liveProjects(), liveSite()]);
   const p = posts.find((x) => x.slug === slug);
   if (!p) notFound();
+  const projectTitles = Object.fromEntries(projects.map((pr) => [pr.slug, pr.title]));
   const related = posts
     .filter((x) => x.slug !== p.slug)
     .map((x) => {
@@ -174,7 +182,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </div>
           <div className="prose-mufat mx-auto mt-12 max-w-3xl">
             {p.body.map((para, i) => (
-              <LinkedParagraph key={i} text={para} />
+              <LinkedParagraph key={i} text={para} projectTitles={projectTitles} />
             ))}
           </div>
         </Reveal>
