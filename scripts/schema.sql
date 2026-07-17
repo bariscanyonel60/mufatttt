@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `references` (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(160) NOT NULL,
   logo VARCHAR(500) NULL,
+  people VARCHAR(255) NULL,
   sort_order INT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -188,3 +189,4 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Existing DB upgrades (safe to re-run if columns already exist — run manually if needed):
 -- ALTER TABLE submissions ADD COLUMN cv_url VARCHAR(500) NULL AFTER job_title;
 -- ALTER TABLE posts ADD COLUMN tags_json JSON NULL AFTER category;
+-- ALTER TABLE `references` ADD COLUMN people VARCHAR(255) NULL AFTER logo;

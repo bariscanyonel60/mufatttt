@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin, Calendar, Ruler, Wrench } from "lucide-react";
-import { liveProjects } from "@/lib/live";
+import { liveProjects, liveSite } from "@/lib/live";
 import Reveal from "@/components/atoms/Reveal";
 import CTA from "@/components/organisms/CTA";
 
@@ -25,7 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const p = (await liveProjects()).find((x) => x.slug === slug);
+  const [projects, site] = await Promise.all([liveProjects(), liveSite()]);
+  const p = projects.find((x) => x.slug === slug);
   if (!p) notFound();
 
   const facts = [
@@ -35,8 +36,55 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     { icon: Ruler, label: "İnşaat Alanı", value: p.area },
   ];
 
+  const pageUrl = `${site.url}/projeler/${p.slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Project",
+        name: p.title,
+        description: p.summary,
+        image: [p.cover, ...p.gallery],
+        url: pageUrl,
+        dateCompleted: `${p.year}-01-01`,
+        provider: {
+          "@type": "Organization",
+          name: site.name,
+          url: site.url,
+        },
+        location: {
+          "@type": "Place",
+          name: p.location,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: p.location.includes("Tokat") && !p.location.includes("Turhal") ? "Tokat" : "Turhal",
+            addressRegion: "Tokat",
+            addressCountry: "TR",
+          },
+        },
+        additionalProperty: [
+          { "@type": "PropertyValue", name: "Yapı tipi", value: p.type },
+          { "@type": "PropertyValue", name: "Alan", value: p.area },
+          { "@type": "PropertyValue", name: "Hizmetler", value: p.services.join(", ") },
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: site.url },
+          { "@type": "ListItem", position: 2, name: "Projeler", item: `${site.url}/projeler` },
+          { "@type": "ListItem", position: 3, name: p.title, item: pageUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="grid-lines bg-ink pb-16 pt-40">
         <div className="container-x">
           <Reveal>

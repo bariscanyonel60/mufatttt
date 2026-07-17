@@ -4,15 +4,15 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
-  LayoutDashboard, Inbox, Settings, Search, Briefcase, Building2, Newspaper,
-  UserPlus, MessageSquareQuote, BadgeCheck, ListOrdered, Info, Image, History,
+  LayoutDashboard, Inbox, Settings, Search, Briefcase, Building2,
+  MessageSquareQuote, BadgeCheck, Info, Image,
   LogOut, Menu, X, ExternalLink,
 } from "lucide-react";
 import { navItems } from "@/lib/admin/schema";
 
 const icons = {
-  LayoutDashboard, Inbox, Settings, Search, Briefcase, Building2, Newspaper,
-  UserPlus, MessageSquareQuote, BadgeCheck, ListOrdered, Info, Image, History,
+  LayoutDashboard, Inbox, Settings, Search, Briefcase, Building2,
+  MessageSquareQuote, BadgeCheck, Info, Image,
 } as const;
 
 export default function AdminShell({

@@ -1,6 +1,7 @@
 import { unstable_noStore as noStore } from "next/cache";
 import { getContent } from "@/lib/admin/store";
 import type { ContentStore } from "@/lib/admin/types";
+import { withTypeGallery } from "@/lib/project-gallery";
 
 /** Canlı içerik — MySQL (DB_*) veya data/content.json */
 export async function liveContent(): Promise<ContentStore> {
@@ -17,7 +18,11 @@ export async function liveServices() {
 }
 
 export async function liveProjects() {
-  return (await liveContent()).projects;
+  const projects = (await liveContent()).projects;
+  return projects.map((p) => ({
+    ...p,
+    gallery: withTypeGallery(p.cover, p.type, p.gallery),
+  }));
 }
 
 export async function liveProjectFilters() {

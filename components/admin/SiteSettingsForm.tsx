@@ -73,7 +73,17 @@ export default function SiteSettingsForm({ initial }: { initial: SiteContent }) 
         <Field
           label="Instagram"
           value={site.socials.instagram}
-          onChange={(v) => set("socials", { ...site.socials, instagram: v, linkedin: "", facebook: "" })}
+          onChange={(v) => set("socials", { ...site.socials, instagram: v })}
+        />
+        <Field
+          label="LinkedIn"
+          value={site.socials.linkedin}
+          onChange={(v) => set("socials", { ...site.socials, linkedin: v })}
+        />
+        <Field
+          label="Facebook"
+          value={site.socials.facebook}
+          onChange={(v) => set("socials", { ...site.socials, facebook: v })}
           full
         />
       </section>

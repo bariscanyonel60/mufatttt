@@ -24,9 +24,24 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       addressRegion: "Tokat",
       addressCountry: "TR",
     },
-    areaServed: ["Turhal", "Tokat", "Amasya", "Sivas"],
+    areaServed: [
+      { "@type": "City", name: "Turhal" },
+      { "@type": "City", name: "Tokat" },
+      { "@type": "City", name: "Zile" },
+      { "@type": "City", name: "Amasya" },
+      { "@type": "City", name: "Sivas" },
+    ],
+    knowsAbout: [
+      "Tokat müteahhit",
+      "Turhal inşaat",
+      "Tokat inşaat",
+      "Deprem yönetmeliği",
+      "TBDY 2018",
+      "Bina güçlendirme",
+      "Plan proje mühendislik",
+    ],
     description:
-      "İnşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük; plan/proje, kamu ihale, güçlendirme ve müşavirlik hizmetleri.",
+      "Tokat ve Turhal’da inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük; 2026 deprem koşulları ve yasalara uygun plan/proje, kamu ihale, güçlendirme ve müşavirlik.",
   };
 
   return (

@@ -54,7 +54,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Güvenlik doğrulaması başarısız." }, { status: 400 });
   }
 
-  const job = (await getContent()).jobs.find((j) => j.id === data.jobId);
+  const OTHER_JOB = { id: "other", title: "Diğer" };
+  const job =
+    data.jobId === OTHER_JOB.id
+      ? OTHER_JOB
+      : (await getContent()).jobs.find((j) => j.id === data.jobId);
   if (!job) {
     return NextResponse.json({ error: "Geçersiz pozisyon." }, { status: 400 });
   }

@@ -70,7 +70,7 @@ export type TestimonialItem = {
   rating: number;
 };
 
-export type ReferenceItem = { name: string; logo?: string };
+export type ReferenceItem = { name: string; logo?: string; people?: string };
 
 export type ProcessStep = { no: string; title: string; desc: string };
 export type ValueItem = { title: string; desc: string };

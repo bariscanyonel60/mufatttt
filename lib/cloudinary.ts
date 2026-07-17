@@ -94,6 +94,30 @@ export async function deleteCloudinaryImage(publicId: string): Promise<void> {
   await cld.uploader.destroy(publicId, { resource_type: "image" });
 }
 
+/** Extract Cloudinary public_id from a delivery URL (image or raw). */
+export function publicIdFromCloudinaryUrl(url: string): string | null {
+  try {
+    const u = new URL(url);
+    const marker = "/upload/";
+    const i = u.pathname.indexOf(marker);
+    if (i < 0) return null;
+    let rest = u.pathname.slice(i + marker.length);
+    rest = rest.replace(/^v\d+\//, "");
+    return decodeURIComponent(rest);
+  } catch {
+    return null;
+  }
+}
+
+/** PDF / Word CV — destroy raw asset under mufat/cvs. */
+export async function deleteCloudinaryCv(publicId: string): Promise<void> {
+  if (!publicId.startsWith(`${CLOUDINARY_FOLDER}/cvs`)) {
+    throw new Error("Geçersiz CV.");
+  }
+  const cld = getCloudinary();
+  await cld.uploader.destroy(publicId, { resource_type: "raw" });
+}
+
 /** PDF / Word CV — stored under mufat/cvs (raw). */
 export async function uploadCloudinaryCv(
   buffer: Buffer,

@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { SiteContent } from "@/lib/admin/types";
-import { Phone, Mail, MapPin, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Instagram, Linkedin, Facebook } from "lucide-react";
 
 export default function Footer({ site }: { site: SiteContent }) {
-  const instagram = site.socials.instagram?.trim();
+  const socials = [
+    { href: site.socials.instagram?.trim(), label: "Instagram", Icon: Instagram },
+    { href: site.socials.linkedin?.trim(), label: "LinkedIn", Icon: Linkedin },
+    { href: site.socials.facebook?.trim(), label: "Facebook", Icon: Facebook },
+  ].filter((s): s is { href: string; label: string; Icon: typeof Instagram } => Boolean(s.href));
 
   return (
     <footer className="bg-ink text-white" role="contentinfo" aria-label="Site alt bilgisi">
@@ -22,17 +26,20 @@ export default function Footer({ site }: { site: SiteContent }) {
           <p className="mt-4 max-w-xs text-[15px] font-medium leading-relaxed text-white/55">
             {site.tagline} Turhal / Tokat merkezli inşaat, mühendislik ve mimarlık ofisi.
           </p>
-          {instagram ? (
+          {socials.length > 0 ? (
             <div className="mt-6 flex gap-3">
-              <a
-                href={instagram}
-                aria-label="Instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-gold hover:text-gold"
-              >
-                <Instagram size={16} />
-              </a>
+              {socials.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-gold hover:text-gold"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
             </div>
           ) : null}
         </div>
@@ -49,7 +56,7 @@ export default function Footer({ site }: { site: SiteContent }) {
         <nav aria-label="Kaynaklar">
           <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-gold">Kaynaklar</p>
           <ul className="mt-5 space-y-3 text-[15px] font-medium text-white/70">
-            {[["Galeri","/galeri"],["Blog","/blog"],["Referanslar","/referanslar"],["İletişim","/iletisim"],["Gizlilik Politikası","/gizlilik-politikasi"],["Çerez Politikası","/cerez-politikasi"]].map(([t,h]) => (
+            {[["Galeri","/galeri"],["Bizden Haberler","/haberler"],["Referanslar","/referanslar"],["İletişim","/iletisim"],["Gizlilik Politikası","/gizlilik-politikasi"],["Çerez Politikası","/cerez-politikasi"]].map(([t,h]) => (
               <li key={h}><Link className="transition hover:text-gold" href={h}>{t}</Link></li>
             ))}
           </ul>

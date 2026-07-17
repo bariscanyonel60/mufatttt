@@ -57,7 +57,7 @@ export default function MediaAdmin() {
         <div>
           <h1 className="font-display text-2xl font-bold">Medya Kütüphanesi</h1>
           <p className="mt-1 text-sm text-white/45">
-            Tüm görseller Cloudinary’de saklanır. Yükleyip URL kopyalayın; projeler/blog kapak alanına yapıştırın.
+            Tüm görseller Cloudinary’de saklanır. Yükleyip URL kopyalayın; proje veya haber kapak alanına yapıştırın.
           </p>
         </div>
         <label className="cursor-pointer rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-white">

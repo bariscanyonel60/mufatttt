@@ -79,7 +79,7 @@ export default function HeroContent({
         {...item(0.12)}
         className="mt-5 font-display text-[2.35rem] font-extrabold leading-[0.98] tracking-[-0.04em] text-white sm:mt-7 sm:text-5xl md:text-6xl lg:text-7xl"
       >
-        İkonik yapıları
+        Güvenli yapıları
         <br />
         <span className="text-[#C48A3A]">mühendislikle</span>
         <br />

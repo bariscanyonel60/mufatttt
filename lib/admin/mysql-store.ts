@@ -128,6 +128,7 @@ export async function dbLoadContent(): Promise<ContentStore> {
   const references: ReferenceItem[] = referenceRows.map((r) => ({
     name: r.name,
     ...(r.logo ? { logo: r.logo } : {}),
+    ...(r.people ? { people: r.people } : {}),
   }));
 
   const processSteps: ProcessStep[] = processRows.map((r) => ({
@@ -334,7 +335,12 @@ async function replaceReferences(items: ReferenceItem[]) {
     await conn.beginTransaction();
     await conn.query("DELETE FROM `references`");
     for (const [i, x] of items.entries()) {
-      await conn.query(`INSERT INTO \`references\` (name,logo,sort_order) VALUES (?,?,?)`, [x.name, x.logo || null, i]);
+      await conn.query(`INSERT INTO \`references\` (name,logo,people,sort_order) VALUES (?,?,?,?)`, [
+        x.name,
+        x.logo || null,
+        x.people || null,
+        i,
+      ]);
     }
     await conn.commit();
   } catch (e) {

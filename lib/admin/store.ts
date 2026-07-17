@@ -123,7 +123,10 @@ export function defaultContent(): ContentStore {
         "MUFAT İnşaat Mühendislik San. ve Tic. Ltd. Şti. — 2002'den bu yana inşaat, mühendislik, mimarlık, taahhüt ve kontrolörlük. TKDK/IPARD, kamu ihale, güçlendirme ve riskli yapı tespiti.",
       keywords: [
         "MUFAT İnşaat Mühendislik",
+        "Tokat müteahhit",
+        "Tokat inşaat",
         "Turhal inşaat",
+        "Turhal müteahhit",
         "Tokat inşaat mühendisliği",
         "plan proje mühendislik",
         "kat karşılığı inşaat",
@@ -133,6 +136,8 @@ export function defaultContent(): ContentStore {
         "riskli yapı tespiti",
         "şantiye şefliği",
         "kontrollük müşavirlik",
+        "TBDY 2018",
+        "deprem yönetmeliği Tokat",
       ],
     },
     updatedAt: new Date().toISOString(),
@@ -294,6 +299,18 @@ export async function updateSubmission(id: string, patch: Partial<Submission>, u
 }
 
 export async function deleteSubmission(id: string, user = "admin") {
+  const current = (await getSubmissions()).items.find((x) => x.id === id);
+
+  if (current?.type === "career" && current.cvUrl) {
+    try {
+      const { deleteCloudinaryCv, publicIdFromCloudinaryUrl } = await import("@/lib/cloudinary");
+      const publicId = publicIdFromCloudinaryUrl(current.cvUrl);
+      if (publicId) await deleteCloudinaryCv(publicId);
+    } catch (e) {
+      console.error("[store] CV Cloudinary silinemedi:", e instanceof Error ? e.message : e);
+    }
+  }
+
   if (isDbEnabled()) {
     await dbDeleteSubmission(id);
   } else {

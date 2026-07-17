@@ -1,3 +1,6 @@
+import { projectBlogPosts } from "@/lib/project-blog-posts";
+import { withTypeGallery } from "@/lib/project-gallery";
+
 function pub(key: string, fallback: string) {
   const v = process.env[key];
   return v && v.trim() ? v.trim() : fallback;
@@ -41,8 +44,8 @@ export const site = {
   mapEmbedUrl: pub("NEXT_PUBLIC_SITE_MAP_EMBED", siteDefaults.mapEmbedUrl),
   socials: {
     instagram: pub("NEXT_PUBLIC_SITE_INSTAGRAM", siteDefaults.socials.instagram),
-    linkedin: "",
-    facebook: "",
+    linkedin: pub("NEXT_PUBLIC_SITE_LINKEDIN", siteDefaults.socials.linkedin),
+    facebook: pub("NEXT_PUBLIC_SITE_FACEBOOK", siteDefaults.socials.facebook),
   },
 };
 
@@ -181,7 +184,7 @@ export type Project = {
 
 export const projectFilters = ["Tümü", "Konut", "Ticari", "Endüstriyel", "Güçlendirme", "Eğitim"];
 
-export const projects: Project[] = [
+const projectsSeed: Project[] = [
   {
     slug: "3-1-28-daireli-konut",
     title: "3+1 28 Daireli Konut Binası",
@@ -192,8 +195,8 @@ export const projects: Project[] = [
     services: ["Müteahhitlik","Plan / Proje"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/v1784190766/mufat/projects/3-1-28-daireli-konut.jpg",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/v1784190766/mufat/projects/3-1-28-daireli-konut.jpg"],
-    summary: "Son dönemde proje ve müteahhitliğini yürüttüğümüz 28 daireli 3+1 konut binası.",
-    body: "28 daireli 3+1 konut binası; plan/proje ve müteahhitlik firmamız bünyesinde gerçekleştirilmiştir. Beyaz, antrasit ve bej tonlarında çağdaş cephe, cam balkon korkulukları ve zemin kat ticaret alanlarıyla tamamlanmıştır.",
+    summary: "Turhal’da plan/proje ve müteahhitliğini yürüttüğümüz 28 daireli 3+1 konut; güncel deprem yönetmeliğine uygun teslim.",
+    body: "28 daireli 3+1 konut binası; plan/proje ve müteahhitlik firmamız bünyesinde gerçekleştirilmiştir. Statik ve mimari koordinasyon ruhsat sürecinden iskâna kadar tek elden yönetildi. Beyaz, antrasit ve bej tonlarında çağdaş cephe, cam balkon korkulukları ve zemin kat ticaret alanlarıyla tamamlanan yapı; Turhal’da büyük ölçekli konut yatırımları için referans niteliğindedir. Şantiye kontrolleri ve imalat belgelendirmesi, yürürlükteki deprem yönetmeliği ve imar mevzuatına uygun yürütülmüştür.",
   },
   {
     slug: "3-1-10-daireli-konut",
@@ -205,8 +208,8 @@ export const projects: Project[] = [
     services: ["Müteahhitlik","Plan / Proje"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/v1784190453/mufat/projects/3-1-10-daireli-konut.jpg",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/v1784190453/mufat/projects/3-1-10-daireli-konut.jpg"],
-    summary: "Proje ve müteahhitliğini üstlendiğimiz 10 daireli 3+1 konut binası.",
-    body: "Beş katlı, 10 daireli 3+1 konut binası. Plan/proje ve müteahhitlik firmamızca yürütülmüş; açık zemin kat, geniş balkonlar ve renkli yatay cephe panelleriyle tamamlanmıştır.",
+    summary: "Turhal’da beş katlı, 10 daireli 3+1 konut; proje ve müteahhitlik MUFAT tarafından tamamlandı.",
+    body: "Beş katlı, 10 daireli 3+1 konut binası. Plan/proje ve müteahhitlik firmamızca yürütülmüş; açık zemin kat, geniş balkonlar ve renkli yatay cephe panelleriyle tamamlanmıştır. Taşıyıcı sistem çözümleri ile cephe estetiği birlikte ele alınmış; ruhsat, uygulama ve teslim süreçleri şeffaf dokümantasyonla yönetilmiştir. Turhal konut stoğuna çağdaş ve yönetmeliğe uygun bir örnek eklenmiştir.",
   },
   {
     slug: "2-0-10-daireli-konut",
@@ -218,8 +221,8 @@ export const projects: Project[] = [
     services: ["Müteahhitlik","Plan / Proje"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/2-0-10-daireli-konut",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/2-0-10-daireli-konut"],
-    summary: "Proje ve müteahhitliğini üstlendiğimiz modern cepheli 10 daireli 2+0 konut binası.",
-    body: "10 daireli 2+0 konut binası; plan/proje ve müteahhitlik firmamızca gerçekleştirilmiştir. Geniş balkonlar, ahşap dokulu düşey cephe vurgusu ve cam korkuluklarla çağdaş bir konut silueti hedeflenmiştir.",
+    summary: "Modern cepheli 10 daireli 2+0 konut; Turhal’da plan/proje ve müteahhitlikle teslim edildi.",
+    body: "10 daireli 2+0 konut binası; plan/proje ve müteahhitlik firmamızca gerçekleştirilmiştir. Geniş balkonlar, ahşap dokulu düşey cephe vurgusu ve cam korkuluklarla çağdaş bir konut silueti hedeflenmiştir. Kompakt daire tipolojisinde de aynı mühendislik disiplini uygulanmış; zemin etüdü, statik proje ve saha imalatları birbirini destekleyecek şekilde koordine edilmiştir.",
   },
   {
     slug: "furkan-apartmani",
@@ -231,8 +234,8 @@ export const projects: Project[] = [
     services: ["Müteahhitlik","Plan / Proje"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/furkan-apartmani",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/furkan-apartmani"],
-    summary: "Proje ve müteahhitliğini üstlendiğimiz 10 daireli 3+1 konut binası (2023).",
-    body: "Furkan Apartmanı; 10 daireli 3+1 konut binası olarak planlanıp müteahhitliğimizle inşa edilmiştir. Ahşap dokulu cephe panelleri, cam balkonlar ve modern dış aydınlatma ile 2023 yılında teslim edilmiştir.",
+    summary: "Furkan Apartmanı: Turhal’da 10 daireli 3+1 konut, 2023 müteahhitlik teslimi.",
+    body: "Furkan Apartmanı; 10 daireli 3+1 konut binası olarak planlanıp müteahhitliğimizle inşa edilmiştir. Ahşap dokulu cephe panelleri, cam balkonlar ve modern dış aydınlatma ile 2023 yılında teslim edilmiştir. Proje sürecinde mimari kararlar taşıyıcı sistem ve yangın–kaçış gereklilikleriyle birlikte çözülmüş; teslimde işverene eksiksiz teknik dosya sunulmuştur.",
   },
   {
     slug: "adalet-apartmani",
@@ -244,8 +247,8 @@ export const projects: Project[] = [
     services: ["Müteahhitlik","Plan / Proje"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/v1784190536/mufat/projects/adalet-apartmani.jpg",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/v1784190536/mufat/projects/adalet-apartmani.jpg"],
-    summary: "Son 5 yılda proje ve müteahhitliğini üstlendiğimiz 2+1, 10 daire ve 2 dükkanlı konut binası.",
-    body: "Adalet Apartmanı; 10 daireli 2+1 konut ile zemin katta 2 dükkandan oluşur. Plan/proje ve müteahhitlik firmamızca yürütülmüş, 2022 yılında tamamlanmıştır.",
+    summary: "Adalet Apartmanı: 10 daire 2+1 ve 2 dükkanlı karma kullanımlı konut (2022).",
+    body: "Adalet Apartmanı; 10 daireli 2+1 konut ile zemin katta 2 dükkandan oluşur. Plan/proje ve müteahhitlik firmamızca yürütülmüş, 2022 yılında tamamlanmıştır. Konut–ticaret birlikteliğinde imar şartları, kaçış ve taşıyıcı süreklilik birlikte ele alınmış; cadde cepheli karma kullanım için dengeli bir çözüm üretilmiştir.",
   },
   {
     slug: "uslu-tekstil-fabrika",
@@ -257,8 +260,8 @@ export const projects: Project[] = [
     services: ["Özel Bina İnşaatı", "Çelik / Fabrika Yapımı"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/uslu-tekstil-fabrika",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/uslu-tekstil-fabrika"],
-    summary: "4.200 m² tekstil üretim binası inşaatı.",
-    body: "Turhal’da Uslu Tekstil için gerçekleştirilen fabrika binası inşaatında; yapı iskeleti, cephe ve saha imalatları birlikte yönetildi. Geniş açıklıklı üretim alanı, tesis süreçlerine uygun şekilde teslim edildi.",
+    summary: "Turhal’da 4.200 m² Uslu Tekstil fabrika binası; iskelet, cephe ve saha imalatlarıyla teslim.",
+    body: "Turhal’da Uslu Tekstil için gerçekleştirilen fabrika binası inşaatında; yapı iskeleti, cephe ve saha imalatları birlikte yönetildi. Geniş açıklıklı üretim alanı, tesis süreçlerine uygun şekilde teslim edildi. Endüstriyel programın gerektirdiği açıklık, yük ve montaj hızı ile deprem yönetmeliği gereklilikleri aynı mühendislik paketinde çözülmüştür.",
   },
   {
     slug: "tibbi-atik-tesisi",
@@ -270,8 +273,8 @@ export const projects: Project[] = [
     services: ["Özel Bina İnşaatı", "Kontrollük"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/tibbi-atik-tesisi",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/tibbi-atik-tesisi"],
-    summary: "600 m² tıbbi atık işleme tesisi binası inşaatı.",
-    body: "Tokat tıbbi atık tesisi inşaatında çelik iskelet, duvar ve çatı imalatları tamamlanarak tesis işletmeye hazır hale getirildi. Sahadaki koordinasyon, teknik şartnameye uygun teslimle sonuçlandı.",
+    summary: "600 m² Tokat tıbbi atık tesisi; çelik iskelet ve teknik şartnameye uygun teslim.",
+    body: "Tokat tıbbi atık tesisi inşaatında çelik iskelet, duvar ve çatı imalatları tamamlanarak tesis işletmeye hazır hale getirildi. Sahadaki koordinasyon, teknik şartnameye uygun teslimle sonuçlandı. Özel süreçli tesis yapılarında kontrollük ve imalat disiplini; kamu–özel kesişimli işlerin güvenli tamamlanmasını sağlamıştır.",
   },
   {
     slug: "asude-apartmani",
@@ -283,8 +286,8 @@ export const projects: Project[] = [
     services: ["Özel Bina İnşaatı", "Yap / Sat"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/asude-apartmani",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/asude-apartmani"],
-    summary: "2008–2010 döneminde tamamlanan 10 daireli, zemin katta 5 dükkanlı konut yapısı.",
-    body: "Asude Apartmanı; konut ve ticaret fonksiyonunu aynı yapıda birleştiren bir proje olarak inşa edildi. Cephe, balkon ve zemin kat dükkân düzeni çevre dokusuyla uyumlu şekilde tamamlandı.",
+    summary: "Asude Apartmanı: 10 daire ve 5 dükkanlı yap-sat konut (2008–2010).",
+    body: "Asude Apartmanı; konut ve ticaret fonksiyonunu aynı yapıda birleştiren bir proje olarak inşa edildi. Cephe, balkon ve zemin kat dükkân düzeni çevre dokusuyla uyumlu şekilde tamamlandı. Yap-sat modelinde ruhsatlı üretim ve teslim kalitesi; uzun vadeli kullanım ve yatırım güvenliği için öne çıkarılmıştır.",
   },
   {
     slug: "liva-evleri",
@@ -296,8 +299,8 @@ export const projects: Project[] = [
     services: ["Özel Bina İnşaatı", "Yap / Sat"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/liva-evleri",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/liva-evleri"],
-    summary: "2006–2010 döneminde tamamlanan 22 daireli konut inşaatı.",
-    body: "Liva Evleri, çok katlı konut bina tipolojisinde teslim edildi. İnşaat süreci boyunca kaba ve ince işler aşamalı olarak yönetildi; 22 dairenin tamamı kullanıma hazır hale getirildi.",
+    summary: "Liva Evleri: Turhal’da 22 daireli çok katlı konut inşaatı (2006–2010).",
+    body: "Liva Evleri, çok katlı konut bina tipolojisinde teslim edildi. İnşaat süreci boyunca kaba ve ince işler aşamalı olarak yönetildi; 22 dairenin tamamı kullanıma hazır hale getirildi. Ölçekli konut üretiminde şantiye organizasyonu, kalite kontrol ve teslim planlaması birlikte yürütülmüştür.",
   },
   {
     slug: "sahika-apartmani",
@@ -309,8 +312,8 @@ export const projects: Project[] = [
     services: ["Özel Bina İnşaatı"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/sahika-apartmani",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/sahika-apartmani"],
-    summary: "2006–2009 döneminde tamamlanan 10 daire ve 3 dükkanlı apartman inşaatı.",
-    body: "Şahika Apartmanı’nda konut birimleri ile zemin kat ticaret alanları birlikte projelendirilip inşa edildi. Cephe renk düzeni ve balkon detaylarıyla yapı şehir siluetine kazandırıldı.",
+    summary: "Şahika Apartmanı: 10 daire ve 3 dükkanlı apartman (2006–2009).",
+    body: "Şahika Apartmanı’nda konut birimleri ile zemin kat ticaret alanları birlikte projelendirilip inşa edildi. Cephe renk düzeni ve balkon detaylarıyla yapı şehir siluetine kazandırıldı. Cadde üstü ticaret + üst kat konut dengesi, imar ve kullanım koşullarına uygun çözülmüştür.",
   },
   {
     slug: "mukavim-konut",
@@ -322,8 +325,8 @@ export const projects: Project[] = [
     services: ["Özel Bina İnşaatı", "Kat Karşılığı"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/mukavim-konut",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/mukavim-konut"],
-    summary: "2004–2008 döneminde tamamlanan 45 daireli kooperatif konut inşaatı.",
-    body: "S.S. Mukavim Konut Yapı Kooperatifi inşaatında çok daireli konut bloğu teslim edildi. İşveren kooperatif yapısına uygun şekilde planlama, imalat ve teslim süreçleri birlikte yürütüldü.",
+    summary: "Mukavim Konut Yapı Kooperatifi: 45 daireli kooperatif konut teslimi (2004–2008).",
+    body: "S.S. Mukavim Konut Yapı Kooperatifi inşaatında çok daireli konut bloğu teslim edildi. İşveren kooperatif yapısına uygun şekilde planlama, imalat ve teslim süreçleri birlikte yürütüldü. Büyük daire sayılı yapılarda şeffaf süreç yönetimi ve teknik disiplin, üyelerin güvenini sağlayan temel unsurlar olmuştur.",
   },
   {
     slug: "anadolu-lisesi-guclendirme",
@@ -335,8 +338,8 @@ export const projects: Project[] = [
     services: ["Bina Güçlendirme", "Kontrollük"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/anadolu-lisesi-guclendirme",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/anadolu-lisesi-guclendirme"],
-    summary: "2008 yılında tamamlanan Anadolu Lisesi binası güçlendirme inşaatı.",
-    body: "Mevcut okul yapısının deprem güvenliğini artırmaya yönelik güçlendirme imalatları uygulandı. Eğitim fonksiyonunun korunması gözetilerek saha işleri planlandı ve yapı güçlendirilerek teslim edildi.",
+    summary: "Tokat Anadolu Lisesi güçlendirme; eğitim fonksiyonu korunarak deprem güvenliği artırıldı.",
+    body: "Mevcut okul yapısının deprem güvenliğini artırmaya yönelik güçlendirme imalatları uygulandı. Eğitim fonksiyonunun korunması gözetilerek saha işleri planlandı ve yapı güçlendirilerek teslim edildi. Okul yapılarında yüksek performans hedefleri dikkate alınmış; müdahale programı eğitim takvimine uyumlu yürütülmüştür.",
   },
   {
     slug: "ahmet-dincer-lisesi",
@@ -348,8 +351,8 @@ export const projects: Project[] = [
     services: ["Kamu İhale İnşaatı", "Özel Bina İnşaatı"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/ahmet-dincer-lisesi",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/ahmet-dincer-lisesi"],
-    summary: "12 derslikli Ahmet Dinçer Lisesi okul binası inşaatı (2005).",
-    body: "Turhal’da 12 derslikli Ahmet Dinçer Lisesi binası inşa edilerek eğitim kullanımına uygun şekilde teslim edildi. Cephe, derslik düzeni ve dış saha imalatları proje kapsamında tamamlandı.",
+    summary: "Turhal Ahmet Dinçer Lisesi: 12 derslikli kamu okul binası inşaatı (2005).",
+    body: "Turhal’da 12 derslikli Ahmet Dinçer Lisesi binası inşa edilerek eğitim kullanımına uygun şekilde teslim edildi. Cephe, derslik düzeni ve dış saha imalatları proje kapsamında tamamlandı. Kamu ihale disiplini; süre, kalite ve mevzuat uyumunu aynı çatı altında toplamıştır.",
   },
   {
     slug: "mensace-mermer-fabrika",
@@ -361,8 +364,8 @@ export const projects: Project[] = [
     services: ["OSB / Fabrika Yapımı", "Çelik Konstrüksiyon"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/mensace-mermer-fabrika",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/mensace-mermer-fabrika"],
-    summary: "1.500 m² mermer sanayi fabrika binası inşaatı (2005).",
-    body: "Mensace Mermer Sanayi için çelik iskeletli fabrika binası inşaatı gerçekleştirildi. Geniş açıklıklı üretim alanı ve saha hazırlığı aynı süreçte tamamlandı.",
+    summary: "Mensace Mermer: 1.500 m² çelik iskeletli fabrika binası (2005).",
+    body: "Mensace Mermer Sanayi için çelik iskeletli fabrika binası inşaatı gerçekleştirildi. Geniş açıklıklı üretim alanı ve saha hazırlığı aynı süreçte tamamlandı. OSB / sanayi yatırımlarında bağlantı detayları, temel sistemi ve montaj programı; işletmeye hazır tesisi hedefleyecek şekilde yönetilmiştir.",
   },
   {
     slug: "ozel-bina-2005",
@@ -374,10 +377,15 @@ export const projects: Project[] = [
     services: ["Özel Bina İnşaatı"],
     cover: "https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/ozel-bina-2005",
     gallery: ["https://res.cloudinary.com/osgt7obm/image/upload/mufat/projects/ozel-bina-2005"],
-    summary: "2005 yılında tamamlanan çok katlı özel konut binası inşaatı.",
-    body: "Turhal’da özel işveren için gerçekleştirilen çok katlı konut binası; kaba inşaattan ince işlere kadar tamamlanarak teslim edildi.",
+    summary: "Turhal’da çok katlı özel konut binası; kaba işten ince işe teslim (2005).",
+    body: "Turhal’da özel işveren için gerçekleştirilen çok katlı konut binası; kaba inşaattan ince işlere kadar tamamlanarak teslim edildi. Özel bina modelinde doğrudan sözleşme yapısıyla ilerlenmiş; ruhsatlı üretim ve şantiye kontrolü ile güvenli teslim hedeflenmiştir.",
   },
 ];
+
+export const projects: Project[] = projectsSeed.map((p) => ({
+  ...p,
+  gallery: withTypeGallery(p.cover, p.type, p.gallery),
+}));
 
 export const processSteps = [
   { no: "01", title: "Keşif", desc: "Arsa, zemin ve ihtiyaç analizi. Doğru soruları en başta sorarız." },
@@ -397,17 +405,31 @@ export const testimonials = [
   { quote: "Arsa alımından iskâna kadar danışmanlık aldık. Yanlış müteahhitle sözleşme imzalamamızı engellediler; o tavsiye bize bir daire kazandırdı.", name: "Mehmet & Elif Y.", role: "Yatırımcı · Amasya", rating: 5 },
 ];
 
-export type Reference = { name: string; logo?: string };
+export type Reference = { name: string; logo?: string; people?: string };
 
 export const references: Reference[] = [
-  { name: "Tokat Belediyesi" },
-  { name: "Turhal Ticaret Odası" },
-  { name: "Anadolu Lojistik" },
-  { name: "Yeşilırmak Yapı" },
-  { name: "Zile Kaymakamlığı" },
-  { name: "OSB Sanayicileri" },
-  { name: "Kervan Yapı" },
-  { name: "Meydan GYO" },
+  { name: "Turhal Belediyesi", logo: "/images/references/turhal-belediyesi.png" },
+  { name: "Zile Belediyesi", logo: "/images/references/zile-belediyesi.png" },
+  { name: "Tokat Belediyesi", logo: "/images/references/tokat-belediyesi.png" },
+  { name: "Koçak Royal İnşaat", people: "Ali Sadık Koçak", logo: "/images/references/kocak-royal.svg" },
+  { name: "CVZ Yapı İnşaat", people: "Güven Ceviz · Turan Ceviz", logo: "/images/references/cvz-yapi.svg" },
+  { name: "Ak Mühendislik", people: "Okay Ak", logo: "/images/references/ak-muhendislik.svg" },
+  { name: "Kızılırmak Yapı", people: "Ayhan Doymuş", logo: "/images/references/kizilirmak-yapi.svg" },
+  { name: "Arslanlar Mimarlık", people: "Eyüp Arslan · Kenan Arslan", logo: "/images/references/arslanlar-mimarlik.svg" },
+  { name: "Öltemler İnşaat", people: "Mustafa Öltem", logo: "/images/references/oltemler-insaat.svg" },
+  { name: "Ufuk İnşaat", people: "İrfan Alpat", logo: "/images/references/ufuk-insaat.svg" },
+  { name: "Yedirirler Grup İnşaat", people: "Mahmut Yedirir · Mehmet Yedirir", logo: "/images/references/yedirirler-grup.svg" },
+  { name: "Terfi İnşaat", people: "Dursun Koçak", logo: "/images/references/terfi-insaat.svg" },
+  { name: "AKS5A İnşaat Gayrimenkul", people: "Av. Abdülkerim Sezek", logo: "/images/references/aks5a.svg" },
+  { name: "Topbaş İnşaat", people: "Tuncay Topbaş · Mustafa Topbaş", logo: "/images/references/topbas-insaat.svg" },
+  { name: "BS60 YAPI", people: "Bilgin Sefil", logo: "/images/references/bs60-yapi.svg" },
+  { name: "Yalçın Elektrik", people: "Yalçın Çetin", logo: "/images/references/yalcin-elektrik.svg" },
+  { name: "ESC İnşaat Çınar Kardeşler", people: "Cuma Çınar", logo: "/images/references/esc-insaat.svg" },
+  { name: "Zengin Emlak", people: "Necati Zengin", logo: "/images/references/zengin-emlak.svg" },
+  { name: "Rıfat Çeçen İnşaat Gayrimenkul", people: "Rıfat Çeçen", logo: "/images/references/rifat-cecen.svg" },
+  { name: "Pırlanta LÜXS İnşaat", people: "Burhan Çaprak", logo: "/images/references/pirlanta-luxs.svg" },
+  { name: "Özkaradeniz İnşaat", people: "Şaban Kansız · Zile", logo: "/images/references/ozkaradeniz.svg" },
+  { name: "Zile Acar İnşaat", people: "Faruk Acar · Zile", logo: "/images/references/zile-acar.svg" },
 ];
 
 export type Post = {
@@ -417,6 +439,7 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  ...projectBlogPosts,
   { slug: "tbdy-2018-ev-sahipleri-icin-ne-anlama-geliyor", title: "TBDY 2018: Ev Sahipleri İçin Ne Anlama Geliyor?",
     excerpt: "Türkiye Bina Deprem Yönetmeliği'nin bir binayı satın alırken veya yaptırırken sizin için değiştirdiği 5 kritik nokta.",
     category: "Deprem Güvenliği", tags: ["TBDY", "Deprem", "Konut"], date: "2026-05-14", readMin: 6,

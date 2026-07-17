@@ -106,6 +106,7 @@ export default function CareerForm({ jobs, defaultJobId }: { jobs: Job[]; defaul
           {jobs.map((j) => (
             <option key={j.id} value={j.id}>{j.title}</option>
           ))}
+          <option value="other">Diğer</option>
         </select>
         {errors.jobId && <p className="mt-1 text-xs text-red-600">{errors.jobId.message}</p>}
       </div>

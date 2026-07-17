@@ -33,6 +33,8 @@ const nextConfig = {
         destination: "https://www.mufatinsaat.com/:path*",
         permanent: true,
       },
+      { source: "/blog", destination: "/haberler", permanent: true },
+      { source: "/blog/:slug", destination: "/haberler/:slug", permanent: true },
     ];
   },
   async headers() {

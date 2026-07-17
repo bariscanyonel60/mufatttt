@@ -7,8 +7,19 @@ import Reveal from "@/components/atoms/Reveal";
 import { livePosts } from "@/lib/live";
 
 export const metadata: Metadata = {
-  title: "Blog — Deprem Güvenliği, Yapı Sistemleri ve Mevzuat",
-  description: "MUFAT mühendislerinden deprem güvenliği, statik proje, çelik yapı ve ruhsat süreçleri üzerine anlaşılır rehberler.",
+  title: "Bizden Haberler — Tokat Müteahhit, Turhal İnşaat ve Deprem Güvenliği",
+  description:
+    "MUFAT İnşaat Mühendislik’ten bizden haberler: Tokat ve Turhal projeleri, TBDY 2018 / 2026 deprem koşulları, ruhsat ve güçlendirme rehberleri.",
+  keywords: [
+    "Tokat müteahhit",
+    "Tokat inşaat",
+    "Turhal inşaat",
+    "deprem yönetmeliği",
+    "TBDY 2018",
+    "Tokat konut",
+    "Turhal müteahhit",
+    "MUFAT haberler",
+  ],
 };
 
 export default async function Page() {
@@ -16,14 +27,14 @@ export default async function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Blog"
-        title="Mühendisliği anlaşılır kılıyoruz."
-        lead="Ev sahipleri, yatırımcılar ve meslektaşlarımız için jargonsuz, uygulanabilir teknik rehberler."
+        eyebrow="Bizden Haberler"
+        title="Sahadan ve masadan notlar."
+        lead="Tokat ve Turhal’daki projelerimiz, deprem güvenliği ve mevzuat üzerine jargonsuz haberler ve rehberler."
       />
       <section className="container-x grid gap-8 py-24 md:grid-cols-2">
         {posts.map((p, i) => (
           <Reveal key={p.slug} delay={(i % 2) * 0.08}>
-            <Link href={`/blog/${p.slug}`} className="card group block overflow-hidden !p-0">
+            <Link href={`/haberler/${p.slug}`} className="card group block overflow-hidden !p-0">
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image src={p.cover} alt={p.title} fill sizes="(max-width:768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105" />
